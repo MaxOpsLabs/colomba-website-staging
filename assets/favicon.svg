@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Colomba">
+  <defs>
+    <linearGradient id="fW" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#CBD8C4"/><stop offset="1" stop-color="#A8B8A3"/>
+    </linearGradient>
+    <linearGradient id="fB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A8B8A3"/><stop offset="1" stop-color="#83987F"/>
+    </linearGradient>
+    <linearGradient id="fH" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#DCB392"/><stop offset="1" stop-color="#C89B7B"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#1C2B26"/>
+  <g transform="translate(8.32 8.32) scale(0.74)">
+    <polygon points="26,2 50,30 22,25" fill="url(#fW)"/>
+    <polygon points="22,25 50,30 32,56" fill="url(#fB)"/>
+    <polygon points="22,25 32,56 11,36" fill="#6F8A73"/>
+    <polygon points="22,25 2,14 11,36" fill="#93A88E"/>
+    <polygon points="46,26 62,14 60,25 50,32" fill="url(#fH)"/>
+  </g>
+</svg>
