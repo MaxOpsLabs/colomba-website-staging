@@ -240,7 +240,15 @@ h2 {
 }
 
 /* --------------------------------------------------- call scene (Anruf) */
-.scene { max-width: 640px; margin: 36px 0 0; }
+.anruf-grid { display: flex; flex-wrap: wrap; gap: clamp(24px, 4vw, 40px); align-items: flex-start; margin: 36px 0 0; }
+.scene { max-width: 640px; margin: 0; flex: 1 1 460px; }
+.call-shot {
+  --cut: 14px;
+  flex: 0 1 380px; min-width: 260px; max-width: 420px; margin: 0;
+  background: var(--forest-2); border: 1px solid var(--hairline); padding: 10px;
+}
+.call-shot picture, .call-shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.call-shot figcaption { margin: 10px 0 0; }
 .scene-tag {
   display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .14em;
   text-transform: uppercase; color: var(--olive); border: 1px solid rgba(157, 190, 134, .35);
@@ -326,6 +334,12 @@ h2 {
 }
 .rail-tab b { display: block; font-size: 14px; font-weight: 700; color: var(--cream); letter-spacing: .01em; }
 .rail-tab span { display: block; margin-top: 4px; font-size: 12.5px; color: var(--sage); line-height: 1.45; }
+.app-shot {
+  --cut: 16px;
+  background: var(--forest-deep); border: 1px solid var(--hairline); padding: 10px; margin: 0 0 18px;
+}
+.app-shot picture, .app-shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.app-shot figcaption { margin: 10px 0 0; }
 
 /* --------------------------------------------------------- transparency */
 .quote {
@@ -395,6 +409,8 @@ footer.site {
   .ring .node { width: 30px; height: 30px; }
   .bubble { max-width: 94%; }
   .kommt b { flex-basis: 100%; }
+  .call-shot { flex-basis: 100%; max-width: 100%; }
+  .app-shot { max-width: 100%; }
 }
 @media (max-width: 560px) {
   /* Auf schmalen Geräten steht der Betrag unter seiner Zeile statt daneben:
@@ -577,47 +593,56 @@ footer.site {
     <h2 class="rv">So klingt ein Anruf bei Heidi.</h2>
     <p class="band-lead rv">Kein Videodreh, keine Behauptung — ein Gespräch, wie Heidi es führt. Nachgestellt, damit kein echter Gast darin vorkommt.</p>
 
-    <div class="scene" id="scene">
-      <span class="scene-tag cut">Beispiel · nachgestellt</span>
-      <ol class="bubbles">
-        <li class="bubble heidi" style="--i:0">
-          <div class="cut">
-            <span class="who">Heidi</span>
-            <p>Grüezi, hier ist Heidi, die KI-Assistentin vom Gasthaus zum Brunnen. Womit darf ich Ihnen helfen?</p>
-          </div>
-        </li>
-        <li class="bubble guest" style="--i:1">
-          <span class="who">Gast</span>
-          <p>Grüezi! Haben Sie heute Abend noch einen Tisch für vier Personen?</p>
-        </li>
-        <li class="bubble heidi" style="--i:2">
-          <div class="cut">
-            <span class="who">Heidi</span>
-            <p>Gern — einen Moment, ich prüfe die Verfügbarkeit. Um 19 Uhr hätte es Platz. Passt Ihnen das?</p>
-          </div>
-        </li>
-        <li class="bubble guest" style="--i:3">
-          <span class="who">Gast</span>
-          <p>Ja, das passt gut.</p>
-        </li>
-        <li class="bubble heidi" style="--i:4">
-          <div class="cut">
-            <span class="who">Heidi</span>
-            <p>Dann ist der Tisch für Sie reserviert. Sie erhalten gleich eine SMS-Bestätigung mit Ihrem Stornocode.</p>
-          </div>
-        </li>
-        <li class="bubble sms" style="--i:5">
-          <div class="sms-card cut">
-            <span class="who">SMS an den Gast</span>
-            <p>Ihre Reservation im Gasthaus zum Brunnen: heute, 19:00 Uhr, 4 Personen. Stornocode <span class="code">S-4172</span>.</p>
-          </div>
-        </li>
-      </ol>
-      <ul class="scene-facts">
-        <li><svg class="tick" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#9DBE86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg> Offenlegung im ersten Satz</li>
-        <li><svg class="tick" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#9DBE86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg> Verfügbarkeit geprüft, dann gebucht</li>
-        <li><svg class="tick" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#9DBE86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg> SMS mit Stornocode</li>
-      </ul>
+    <div class="anruf-grid">
+      <div class="scene" id="scene">
+        <span class="scene-tag cut">Beispiel · nachgestellt</span>
+        <ol class="bubbles">
+          <li class="bubble heidi" style="--i:0">
+            <div class="cut">
+              <span class="who">Heidi</span>
+              <p>Grüezi, hier ist Heidi, die KI-Assistentin von Osteria Milano. Womit darf ich Ihnen helfen?</p>
+            </div>
+          </li>
+          <li class="bubble guest" style="--i:1">
+            <span class="who">Gast</span>
+            <p>Grüezi! Haben Sie heute Abend noch einen Tisch für vier Personen?</p>
+          </li>
+          <li class="bubble heidi" style="--i:2">
+            <div class="cut">
+              <span class="who">Heidi</span>
+              <p>Gern — einen Moment, ich prüfe die Verfügbarkeit. Um 19 Uhr hätte es Platz. Passt Ihnen das?</p>
+            </div>
+          </li>
+          <li class="bubble guest" style="--i:3">
+            <span class="who">Gast</span>
+            <p>Ja, das passt gut.</p>
+          </li>
+          <li class="bubble heidi" style="--i:4">
+            <div class="cut">
+              <span class="who">Heidi</span>
+              <p>Dann ist der Tisch für Sie reserviert. Sie erhalten gleich eine SMS-Bestätigung mit Ihrem Stornocode.</p>
+            </div>
+          </li>
+          <li class="bubble sms" style="--i:5">
+            <div class="sms-card cut">
+              <span class="who">SMS an den Gast</span>
+              <p>Ihre Reservation bei Osteria Milano: heute, 19:00 Uhr, 4 Personen. Stornocode <span class="code">S-4172</span>.</p>
+            </div>
+          </li>
+        </ol>
+        <ul class="scene-facts">
+          <li><svg class="tick" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#9DBE86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg> Offenlegung im ersten Satz</li>
+          <li><svg class="tick" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#9DBE86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg> Verfügbarkeit geprüft, dann gebucht</li>
+          <li><svg class="tick" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#9DBE86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg> SMS mit Stornocode</li>
+        </ul>
+      </div>
+      <figure class="call-shot cut rv">
+        <picture>
+          <source type="image/webp" srcset="assets/app/s3-anrufe@1x.webp 1x, assets/app/s3-anrufe@2x.webp 2x">
+          <img src="assets/app/s3-anrufe@1x.webp" width="1440" height="900" loading="lazy" alt="App-Ansicht: Anrufe, Transkript aufgeklappt, Beispiel nachgestellt (Osteria Milano)">
+        </picture>
+        <figcaption class="eyebrow">So sieht der Wirt das Gespräch in der App</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -715,6 +740,20 @@ footer.site {
         <p class="band-lead rv">Alles, was Heidi annimmt, sehen Sie sofort: jede Buchung, jeder Anruf, jede Aufgabe. Für Web und Android — iOS folgt.</p>
       </div>
       <div class="app-visual rv">
+        <figure class="app-shot main cut">
+          <picture>
+            <source type="image/webp" srcset="assets/app/s1-reservationen@1x.webp 1x, assets/app/s1-reservationen@2x.webp 2x">
+            <img src="assets/app/s1-reservationen@1x.webp" width="1440" height="900" loading="lazy" alt="App-Ansicht: Heute, Reservationsliste (Osteria Milano)">
+          </picture>
+          <figcaption class="eyebrow">Heute · Reservationsliste</figcaption>
+        </figure>
+        <figure class="app-shot cut">
+          <picture>
+            <source type="image/webp" srcset="assets/app/s4-woche@1x.webp 1x, assets/app/s4-woche@2x.webp 2x">
+            <img src="assets/app/s4-woche@1x.webp" width="1440" height="900" loading="lazy" alt="App-Ansicht: Woche, 28 Reservationen, nachgestellt (Osteria Milano)">
+          </picture>
+          <figcaption class="eyebrow">Woche · 28 Reservationen, nachgestellt</figcaption>
+        </figure>
         <div class="rail cut">
           <p class="rail-title">Vier Ansichten, ein Tag</p>
           <div class="rail-tabs">
