@@ -382,6 +382,28 @@ footer.site {
   body { font-size: 16px; }
   .rail-tabs { grid-template-columns: 1fr; }
 }
+/* Datenschutz — Tabellen und Hinweiskästen aus der kanonischen Fassung */
+.legal table {
+  width: 100%; border-collapse: collapse; margin: 1.2em 0; font-size: 14.5px;
+  display: block; overflow-x: auto;
+}
+.legal th, .legal td {
+  text-align: left; padding: .6em .7em; border-bottom: 1px solid var(--hairline);
+  vertical-align: top; color: var(--sage);
+}
+.legal th { color: var(--cream); font-weight: 600; white-space: nowrap; }
+.legal .box {
+  --cut: 12px;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  background: var(--forest-2); border: 1px solid var(--hairline);
+  padding: 16px 18px; margin: 1.4em 0;
+}
+.legal .box p:first-child { margin-top: 0; }
+.legal .box p:last-child { margin-bottom: 0; }
+.legal h3 { font-family: var(--serif); font-weight: 600; font-size: 17px; color: var(--cream); margin: 1.6em 0 .4em; }
+.legal .stand { color: var(--sage); font-size: 14px; margin: 0 0 2em; }
+.legal ul { padding-left: 1.2em; }
+.legal li { margin: .35em 0; }
 </style>
 </head>
 <body>
@@ -399,18 +421,220 @@ footer.site {
 <main id="main" class="wrap legal">
   <h1>Datenschutz</h1>
 
-  <h2>Diese Website</h2>
-  <p>Diese Website setzt keine Cookies, verwendet keine Analyse- oder Tracking-Dienste und lädt keine Inhalte von Drittanbietern. Alle Schriften und Skripte werden von dieser Website selbst ausgeliefert.</p>
-  <p>Beim Abruf der Seiten verarbeitet der Hosting-Anbieter technisch bedingte Zugriffsdaten (zum Beispiel die IP-Adresse) zur Auslieferung und Absicherung des Dienstes. Darauf haben wir keinen inhaltlichen Zugriff.</p>
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       WEBSITE-FLUG-V1, 2026-08-31 — der Text unten ist NICHT erfunden. Er ist
+       wortgleich aus maxops `colomba/website-v2/datenschutz.html` übernommen
+       (= `apps/web/public/datenschutz.html`), der Fassung, die
+       DATENSCHUTZ-RESTORE-1 (30.08., Adrian-Lane) als die zu veröffentlichende
+       erklärt. Nur die Gestaltung ist neu.
 
-  <h2>Vollständige Datenschutzerklärung</h2>
-  <!-- GO-LIVE: die vollständige, juristisch geprüfte Datenschutzerklärung
-       (inkl. Angaben zum Produkt) ersetzt diesen Abschnitt. Bewusst nicht in
-       der Vorschau — der geprüfte Text liegt ausserhalb dieses Baums. -->
-  <p><span class="slot">Die vollständige Datenschutzerklärung wird mit dem Go-Live dieser Website veröffentlicht.</span></p>
+       FREIGABE-GATE, UNVERÄNDERT: die Quelle trägt ihr eigenes «DO NOT PUBLISH
+       until every [CONFIRM-ADRIAN] is signed off» und sieben offene Punkte
+       (F3 Stand-Datum · F4 AVV mit den Betrieben · F6 Rechtsgrundlage
+       Allergie-/Gesundheitsdaten · F7 Auftragsbearbeiter-Liste · F8 Google-Daten
+       · F9 Aufbewahrungsfristen · F10 Cookies der Web-Oberfläche). Diese Seite
+       ist damit deploy-BEREIT, aber nicht deploy-FREI: die Freigabe ist Adrians,
+       nicht die dieser Mission. Keine Rechtsberatung.
+       ══════════════════════════════════════════════════════════════════════ -->
 
-  <h2>Kontakt</h2>
-  <p>Fragen zum Datenschutz richten Sie an die im <a href="impressum.html">Impressum</a> genannte Stelle.</p>
+<!-- [CONFIRM-ADRIAN] F3 — Stand-Datum. Proposal: date of first publication. -->
+<p class="stand">Stand: 11. August 2026</p>
+
+<p>Diese Erklärung beschreibt, welche Personendaten wir im Zusammenhang mit der Colomba-App und
+der telefonischen KI-Assistentin bearbeiten, zu welchen Zwecken das geschieht und welche Rechte
+Ihnen zustehen. Sie richtet sich nach dem revidierten Schweizer Datenschutzgesetz (revDSG) und,
+soweit anwendbar, nach der DSGVO.</p>
+
+<h2 id="verantwortlich">1. Verantwortliche Stelle</h2>
+<!-- F1 — RULED 2026-08-11: the responsible party is ROMAN as a NATURAL PERSON.
+     Deliberately NOT Adrian: the FSE frame forbids naming him in public Colomba documents,
+     and this page is public. No Rechtsform / Handelsregister entry is asserted, because none
+     exists — a natural person is the honest and FSE-safe answer until an entity is formed.
+     Wiesenschanzweg 46<br>
+  4057 Basel<br>
+  Schweiz is the ONLY remaining placeholder and the publish runner fails closed
+     on it by design. -->
+<div class="box">
+  <p><strong>Roman Gerčák</strong><br>
+  Wiesenschanzweg 46<br>
+  4057 Basel<br>
+  Schweiz<br>
+  E-Mail: <a href="mailto:info@colomba-swiss.ch">info@colomba-swiss.ch</a></p>
+</div>
+<p>Für sämtliche Anliegen zum Datenschutz und zur Ausübung Ihrer Rechte erreichen Sie uns unter
+der oben genannten E-Mail-Adresse.</p>
+
+<h2 id="geltung">2. Geltungsbereich</h2>
+<p>Diese Erklärung gilt für die Colomba-App (Android und iOS), die zugehörige Web-Anwendung sowie
+die telefonische KI-Assistentin, die Anrufe für angeschlossene Gastronomiebetriebe entgegennimmt.</p>
+
+<h2 id="rollen">3. Wer ist wofür verantwortlich</h2>
+<p>Die Rollenverteilung ist für das Verständnis dieser Erklärung zentral:</p>
+<ul>
+  <li><strong>Kontodaten der App-Nutzerinnen und -Nutzer</strong> (Personal und Leitung des
+  Betriebs): Colomba ist <strong>verantwortliche Stelle</strong>.</li>
+  <li><strong>Gästedaten</strong> (Reservationsnamen, Telefonnummern, Notizen, Allergien,
+  Anrufaufzeichnungen): der jeweilige <strong>Gastronomiebetrieb ist die verantwortliche
+  Stelle</strong>. Colomba handelt insoweit als <strong>Auftragsbearbeiter</strong> und
+  bearbeitet diese Daten ausschliesslich weisungsgebunden. Ergänzend gilt die
+  Datenschutzerklärung des jeweiligen Betriebs.</li>
+</ul>
+<!-- [CONFIRM-ADRIAN] F4 — Auftragsbearbeitungsvertrag (AVV/DPA) mit den Betrieben.
+     Proposal below asserts only that one is CONCLUDED, which must be true before publishing. -->
+<p>Mit den angeschlossenen Betrieben besteht eine Vereinbarung zur Auftragsbearbeitung.</p>
+
+<h2 id="app">4. Daten, welche die Colomba-App bearbeitet</h2>
+
+<h3>4.1 Kontodaten</h3>
+<table>
+  <tr><th>Daten</th><th>Zweck</th><th>Pflicht?</th></tr>
+  <tr><td>E-Mail-Adresse und Passwort</td><td>Anmeldung und Kontoverwaltung</td><td>erforderlich</td></tr>
+  <tr><td>Name, Google-Kennung (bei «Mit Google anmelden»)</td><td>Zuordnung des Kontos</td><td>nur bei Google-Anmeldung</td></tr>
+  <tr><td>Telefonnummer</td><td>Verifizierung per SMS, Missbrauchsprävention</td><td>freiwillig</td></tr>
+  <tr><td>Betriebszuordnung und Rolle</td><td>Zugriff auf den richtigen Betrieb</td><td>erforderlich</td></tr>
+</table>
+<p>Passwörter werden ausschliesslich als kryptografischer Hash gespeichert, nie im Klartext.
+Anmeldetoken, Betriebszuordnung und E-Mail-Adresse werden auf dem Gerät <strong>verschlüsselt</strong>
+abgelegt und sind von der Cloud-Sicherung sowie der Geräteübertragung ausgenommen. Aktivieren Sie
+die App-Sperre, wird lediglich ein Hash Ihrer PIN gespeichert, nie die PIN selbst.</p>
+
+<h3>4.2 Betriebsdaten (im Auftrag des Betriebs)</h3>
+<p>Reservationen (Name, Telefonnummer, Personenzahl, Zeitpunkt, Anlass, Sitzplatzwunsch,
+<strong>Allergien</strong>, Notizen), Anrufe (Rufnummer, Zusammenfassung, Transkript,
+Aufzeichnung, Dauer, Ergebnis), Aufgaben und Rückrufe sowie Raum- und Tischpläne.</p>
+<div class="box">
+  <p><strong>Angaben zu Allergien können Gesundheitsdaten darstellen</strong> und gelten damit als
+  besonders schützenswerte Personendaten (revDSG) bzw. als besondere Kategorie personenbezogener
+  Daten (Art. 9 DSGVO). Sie werden ausschliesslich zur Durchführung der Reservation bearbeitet und
+  sind stets eine freiwillige Angabe.</p>
+</div>
+<p>Diese Daten werden <strong>nicht auf dem Gerät gespeichert</strong>; die App zeigt sie jeweils
+aktuell aus unserem System an.</p>
+
+<h3>4.3 Was die App nicht tut</h3>
+<p>Die App verwendet <strong>keine Werbe-ID</strong>, keine Analyse-, Tracking- oder
+Absturzberichts-Dienste, erhebt <strong>keine Standortdaten</strong> und greift nicht auf
+Kontakte, Kalender, Fotos oder Dateien zu. Es findet keine Weitergabe zu Werbezwecken statt und
+es gibt keine Käufe in der App.</p>
+
+<h3>4.4 Berechtigungen</h3>
+<ul>
+  <li><strong>Internet</strong> — Kommunikation mit unserem System.</li>
+  <li><strong>Mitteilungen</strong> — Hinweise zu neuen Reservationen und verpassten Anrufen,
+  nur nach Ihrer ausdrücklichen Zustimmung.</li>
+  <li><strong>Biometrie</strong> — optionales Entsperren der App-Sperre; die Prüfung erfolgt
+  ausschliesslich lokal auf Ihrem Gerät, biometrische Merkmale erreichen uns nie.</li>
+</ul>
+
+<h2 id="heidi">5. Die telefonische KI-Assistentin</h2>
+<p>Ruft eine Person im Betrieb an, kann das Gespräch von einer KI-Assistentin entgegengenommen
+werden. Dabei werden die Rufnummer, der Gesprächsinhalt, ein Transkript, eine Zusammenfassung und
+eine Audioaufzeichnung bearbeitet, damit die Reservation korrekt erfasst und im Streitfall
+nachvollzogen werden kann.</p>
+<!-- F5 — CORRECTED 2026-08-11 against the LIVE assistant prompt
+     (colomba/voice/heidi-llm-live.pre-landline-20260803T163957Z.json). Its begin_message
+     announces the AI ("ich bin ein KI-System") and says NOTHING about recording — zero
+     matches for aufgezeichnet/Aufnahme/mitgeschnitten/record anywhere in the prompt.
+     The earlier proposal claimed an announced recording with consent as the legal basis.
+     That was false, so it is gone: this page now asserts only what is actually said.
+     FOLLOW-UP (backlog, due before 1.11.): add a recording announcement to the live prompt,
+     which is what would make consent an available legal basis. -->
+<p>Zu Beginn des Gesprächs weist die Assistentin ausdrücklich darauf hin, dass es sich um ein
+KI-System handelt. Sie können das Gespräch jederzeit beenden und den Betrieb auf einem anderen
+Weg erreichen.</p>
+<p>Transparenzhinweis: Es handelt sich um ein KI-System. Anrufende werden entsprechend informiert.</p>
+
+<h2 id="google">6. Anmeldung mit Google</h2>
+<p>Nutzen Sie «Mit Google anmelden», übermittelt Google uns ein Identitätsmerkmal, welches Ihre
+Google-Kennung, Ihre E-Mail-Adresse, Ihren Namen und einen Link auf Ihr Profilbild enthalten kann.
+<!-- [CONFIRM-ADRIAN] F8 — depends on PART A3 (does the backend persist name/picture?).
+     The sentence below states the CONSERVATIVE case (only identifier + e-mail retained).
+     If A3 shows name/picture ARE persisted, replace this sentence before publishing. -->
+Wir verwenden diese Angaben zur Zuordnung Ihres Kontos; dauerhaft gespeichert werden dabei Ihre
+Google-Kennung und Ihre E-Mail-Adresse.</p>
+<p>Die Anmeldung selbst wird von Google durchgeführt; dabei gelten zusätzlich die
+Datenschutzbestimmungen von Google.</p>
+
+<h2 id="zwecke">7. Zwecke und Rechtsgrundlagen</h2>
+<table>
+  <tr><th>Zweck</th><th>Rechtsgrundlage</th></tr>
+  <tr><td>Bereitstellung von Konto und App</td><td>Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO)</td></tr>
+  <tr><td>Durchführung von Reservationen im Auftrag des Betriebs</td><td>Vertragserfüllung / Auftragsbearbeitung</td></tr>
+  <tr><td>Sicherheit, Missbrauchs- und Betrugsprävention</td><td>Berechtigtes Interesse (lit. f)</td></tr>
+  <tr><td>Mitteilungen (Push)</td><td>Einwilligung (lit. a)</td></tr>
+  <!-- Consent is deliberately NOT claimed here: see F5 — no recording announcement is made,
+       so consent could not have been validly obtained. Stated as contract performance, which
+       is what the recording actually serves (executing and evidencing the reservation). -->
+  <tr><td>Gesprächsaufzeichnung</td><td>Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO)</td></tr>
+  <!-- [CONFIRM-ADRIAN] F6 — legal basis for allergy (health) data. Proposal: explicit consent. -->
+  <tr><td>Angaben zu Allergien</td><td>Ausdrückliche Einwilligung (Art. 9 Abs. 2 lit. a DSGVO)</td></tr>
+</table>
+
+<h2 id="dritte">8. Auftragsbearbeiter, Hosting und Auslandbekanntgabe</h2>
+<!-- [CONFIRM-ADRIAN] F7 — sub-processor list. Hosting = Hetzner Online GmbH, Helsinki/FI (EU) —
+     CONFIRMED 2026-08-30 (DATENSCHUTZ-RESTORE-1, Adrian-Lane ruling; pablo = Hetzner CX23,
+     Helsinki, fleet/TOPOLOGY.md). Country corrected from an earlier unverified "(DE)" note.
+     The Google / telephony rows below still need confirming against the live stack before
+     publishing. HARD RULE from the brief: never claim "Server in der Schweiz". -->
+<table>
+  <tr><th>Empfänger</th><th>Zweck</th><th>Ort der Bearbeitung</th></tr>
+  <tr><td>Hetzner Online GmbH</td><td>Hosting der Anwendung und der Datenbank</td><td>Finnland, Helsinki (EU)</td></tr>
+  <tr><td>Google Ireland Ltd. / Google LLC</td><td>«Mit Google anmelden»; Versand von Push-Mitteilungen, sofern aktiviert</td><td>EU / USA</td></tr>
+  <tr><td>Anbieter der Telefonie- und Sprachverarbeitung</td><td>Entgegennahme und Verarbeitung von Anrufen</td><td>EU / USA</td></tr>
+</table>
+<div class="box">
+  <p><strong>Hinweis zum Serverstandort:</strong> Unsere Anwendung und die Datenbank werden in
+  einem Rechenzentrum in <strong>Helsinki, Finnland</strong> betrieben (Hetzner Online GmbH). Die
+  Daten werden damit innerhalb des EU-/EWR-Raums bearbeitet und <strong>nicht in der
+  Schweiz</strong> gespeichert. Finnland verfügt aus Sicht des schweizerischen Rechts über einen
+  angemessenen Datenschutz; eine Bekanntgabe ins Ausland ist damit zulässig.</p>
+</div>
+<p>Erfolgt ausnahmsweise eine Bearbeitung in einem Land ohne angemessenes Schutzniveau, stützen
+wir diese auf anerkannte Garantien wie die Standardvertragsklauseln. Wir verkaufen keine
+Personendaten und geben sie nicht zu Werbezwecken weiter.</p>
+
+<h2 id="aufbewahrung">9. Aufbewahrung</h2>
+<!-- [CONFIRM-ADRIAN] F9 — retention periods per category. Proposals below. -->
+<table>
+  <tr><th>Kategorie</th><th>Aufbewahrung</th></tr>
+  <tr><td>Kontodaten</td><td>für die Dauer des Kontos, danach Löschung innert 30 Tagen</td></tr>
+  <tr><td>Reservationsdaten</td><td>24 Monate nach dem Reservationsdatum</td></tr>
+  <tr><td>Anrufaufzeichnungen und Transkripte</td><td>90 Tage; beim Telefonie-Anbieter erfolgt die Löschung automatisch spätestens innert 90 Tagen</td></tr>
+  <tr><td>Aufgaben und Rückrufe</td><td>12 Monate</td></tr>
+</table>
+<p>Längere Fristen gelten, soweit gesetzliche Aufbewahrungspflichten dies verlangen.</p>
+
+<h2 id="rechte">10. Ihre Rechte</h2>
+<p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Bearbeitung,
+Datenherausgabe bzw. -übertragung sowie das Recht, einer Bearbeitung zu widersprechen. Erteilte
+Einwilligungen können Sie jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+<div class="box">
+  <p><strong>Konto und Daten löschen:</strong> Wie Sie die Löschung Ihres Kontos und der
+  zugehörigen Daten verlangen, ist ausführlich auf einer eigenen Seite beschrieben —
+  <a href="https://api.colomba-swiss.ch/app/konto-loeschen.html">Konto und Daten löschen</a>.</p>
+</div>
+<p>Betrifft Ihr Anliegen Gästedaten eines bestimmten Betriebs, richten Sie es bitte an diesen
+Betrieb als verantwortliche Stelle; wir unterstützen ihn dabei.</p>
+<p>Ihnen steht ausserdem das Recht zu, sich bei einer Aufsichtsbehörde zu beschweren — in der
+Schweiz beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB), in der EU bei
+der für Sie zuständigen Aufsichtsbehörde.</p>
+
+<h2 id="sicherheit">11. Sicherheit</h2>
+<p>Die Übertragung erfolgt ausschliesslich verschlüsselt über TLS. Der Zugriff ist nach dem
+Grundsatz der geringstmöglichen Berechtigung geregelt. Anmeldedaten werden auf dem Gerät im
+verschlüsselten Speicher des Betriebssystems abgelegt.</p>
+
+<h2 id="kinder">12. Kinder</h2>
+<p>Die App richtet sich an Gastronomiebetriebe und deren Personal und nicht an Kinder.</p>
+
+<h2 id="cookies">13. Cookies</h2>
+<!-- [CONFIRM-ADRIAN] F10 — confirm the web surface sets no analytics/marketing cookies. -->
+<p>Die Web-Anwendung setzt ausschliesslich technisch notwendige Speichermerkmale, die für die
+Anmeldung erforderlich sind. Es werden keine Analyse- oder Marketing-Cookies verwendet.</p>
+
+<h2 id="aenderungen">14. Änderungen</h2>
+<p>Wir können diese Erklärung anpassen. Massgebend ist die jeweils auf dieser Seite
+veröffentlichte Fassung.</p>
 </main>
 
 <footer class="site">

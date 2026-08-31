@@ -5,13 +5,13 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Colomba — KI-Telefon-Empfang für Schweizer Restaurants</title>
-<meta name="description" content="Der KI-Telefon-Empfang für Schweizer Restaurants. Heidi nimmt jeden Anruf entgegen, bucht Tische und bestätigt per SMS.">
+<meta name="description" content="Der KI-Telefon-Empfang für Schweizer Restaurants. Heidi nimmt Anrufe entgegen, bucht Tische und bestätigt per SMS — rund um die Uhr, auch wenn im Service gerade niemand ans Telefon kann.">
 <link rel="canonical" href="https://colomba-swiss.ch/">
 <!-- i18n-ready: DE ships first. EN/FR/IT land as /en/ /fr/ /it/ siblings of this file;
      hreflang links activate here when the first sibling exists. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Colomba — KI-Telefon-Empfang für Schweizer Restaurants">
-<meta property="og:description" content="Heidi nimmt jeden Anruf entgegen, bucht Tische und bestätigt per SMS — auch dann, wenn im Service gerade niemand ans Telefon kann.">
+<meta property="og:description" content="Heidi nimmt Anrufe entgegen, bucht Tische und bestätigt per SMS — rund um die Uhr, auch wenn im Service gerade niemand ans Telefon kann.">
 <meta property="og:url" content="https://colomba-swiss.ch/">
 <meta property="og:locale" content="de_CH">
 <meta property="og:image" content="https://colomba-swiss.ch/assets/og-card.png">
@@ -117,7 +117,8 @@ a:focus-visible, button:focus-visible {
 
 /* ---------------------------------------------------------------- header */
 header.site {
-  padding: 22px 0;
+  /* Kurzform mit 0 hätte die seitliche Polsterung von .wrap gelöscht. */
+  padding: 22px var(--pad-x);
 }
 .site-inner {
   display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
@@ -142,7 +143,10 @@ header.site {
 .dot.live { animation: pulse 1.6s infinite; }
 
 /* ------------------------------------------------------------------ hero */
-.hero { padding: clamp(24px, 6vh, 72px) 0 clamp(40px, 8vh, 96px); }
+/* Die padding-Kurzform hat die seitliche Polsterung von .wrap überschrieben —
+   auf 390 px klebte der Hero am linken Rand, während der Kopf eingerückt war.
+   Vorbestehend, hier mitgenommen. */
+.hero { padding: clamp(24px, 6vh, 72px) var(--pad-x) clamp(40px, 8vh, 96px); }
 .hero-grid {
   display: flex; flex-wrap: wrap; align-items: center;
   gap: clamp(28px, 5vw, 64px);
@@ -220,7 +224,7 @@ h1 {
 }
 
 /* -------------------------------------------------------------- sections */
-section.band { padding: clamp(48px, 9vh, 104px) 0; border-top: 1px solid var(--hairline); }
+section.band { padding: clamp(48px, 9vh, 104px) var(--pad-x); border-top: 1px solid var(--hairline); }
 h2 {
   font-family: var(--serif); font-weight: 600;
   font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.12; letter-spacing: -.02em;
@@ -290,6 +294,8 @@ h2 {
 }
 @media (min-width: 900px) {
   .cards { grid-template-columns: repeat(3, 1fr); }
+  /* Grenzen sind vier — zwei mal zwei liest sich als Satz, drei plus eins als Rest. */
+  .cards.pairs { grid-template-columns: repeat(2, 1fr); }
 }
 .card {
   --cut: 14px;
@@ -390,10 +396,79 @@ footer.site {
   .bubble { max-width: 94%; }
   .kommt b { flex-basis: 100%; }
 }
+@media (max-width: 560px) {
+  /* Auf schmalen Geräten steht der Betrag unter seiner Zeile statt daneben:
+     `white-space: nowrap` auf .num würde die Seite sonst breiter machen als das
+     Fenster, und eine Seite, die seitlich scrollt, hat kein Layout mehr. */
+  .price-list li { grid-template-columns: 1fr; }
+  .price-list .num { text-align: left; white-space: normal; margin-top: 2px; }
+}
 @media (max-width: 480px) {
   body { font-size: 16px; }
   .rail-tabs { grid-template-columns: 1fr; }
 }
+/* ------------------------------------------------------- Kapitel «Der Flug» */
+.eyebrow .ch {
+  color: var(--olive); font-variant-numeric: tabular-nums;
+  margin-right: 10px; padding-right: 10px; border-right: 1px solid var(--hairline);
+}
+.hero-kicker { margin: 0 0 16px; }
+
+/* Die Flugbahn — EINE Bewegung, an jeder Kapitelnaht dieselbe: die gestrichelte
+   Linie zieht sich einmal durch, wenn die Naht ins Bild kommt. Bei reduzierter
+   Bewegung steht sie einfach da. Kein zweiter Effekt kommt dazu. */
+.flightpath { width: 24px; height: clamp(38px, 5.5vh, 68px); margin: 0 auto; }
+.flightpath svg { display: block; width: 100%; height: 100%; }
+.flightpath path { stroke-dasharray: 5 7; }
+.js .flightpath.rv { opacity: 1; transform: none; transition: none; }
+.js .flightpath.rv path { stroke-dashoffset: 300; transition: stroke-dashoffset 1.8s ease-out; }
+.js .flightpath.rv.in path { stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .js .flightpath.rv path { stroke-dashoffset: 0; transition: none; }
+}
+
+/* ------------------------------------------------------------- Kopf-Chips */
+.chip-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.login-chip { color: var(--cream); }
+.login-chip:hover { border-color: var(--olive); color: var(--cream); }
+
+/* ------------------------------------------------------------------ Preis */
+.prices {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 14px; margin: 36px 0 0;
+}
+@media (min-width: 980px) { .prices { grid-template-columns: repeat(3, 1fr); } }
+.price-card {
+  --cut: 16px;
+  background: var(--forest-2); border: 1px solid var(--hairline);
+  padding: 24px 22px 22px; display: flex; flex-direction: column;
+}
+.price-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--olive); margin: 0;
+}
+.price-sub { margin: 10px 0 0; font-size: 14px; line-height: 1.5; color: var(--sage); text-wrap: pretty; }
+.price-list { list-style: none; margin: 18px 0 0; padding: 0; }
+.price-list li {
+  display: grid; grid-template-columns: 1fr auto; gap: 2px 14px; align-items: baseline;
+  padding: 12px 0; border-top: 1px solid var(--hairline);
+}
+.price-list li:last-child { border-bottom: 1px solid var(--hairline); }
+.price-list b { font-size: 15px; font-weight: 600; color: var(--cream); }
+.price-list .num {
+  font-family: var(--serif); font-weight: 600; font-size: 16px; color: var(--cream);
+  font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right;
+}
+.price-list .note { grid-column: 1 / -1; font-size: 13px; line-height: 1.45; color: var(--sage); text-wrap: pretty; }
+.price-foot { margin: 16px 0 0; font-size: 13px; line-height: 1.55; color: var(--sage); text-wrap: pretty; }
+.price-foot b { color: var(--cream); font-weight: 600; }
+.price-legal { margin: 26px 0 0; font-size: 13px; color: var(--sage); }
+
+/* ------------------------------------------------------------------- Haus */
+.haus-grid { display: flex; flex-wrap: wrap; gap: clamp(28px, 5vw, 64px); align-items: center; margin-top: 8px; }
+.haus-copy { flex: 1 1 380px; min-width: 280px; }
+.haus-copy .band-lead + .band-lead { margin-top: 14px; }
+.haus-visual { flex: 1 1 320px; min-width: 260px; }
 </style>
 <script type="application/ld+json">
 {
@@ -416,22 +491,42 @@ footer.site {
       <img src="assets/colomba-dove.svg" alt="" width="34" height="34">
       <b>Colomba</b>
     </a>
-    <a class="pilot-chip cut" href="#pilot">
-      <span class="dot live" aria-hidden="true"></span>
-      Pilotprogramm 2026
-    </a>
+    <div class="chip-row">
+      <a class="pilot-chip cut" href="#pilot">
+        <span class="dot live" aria-hidden="true"></span>
+        Pilotprogramm 2026
+      </a>
+      <a class="pilot-chip login-chip cut" href="https://api.colomba-swiss.ch/app/login">
+        Anmelden
+      </a>
+    </div>
   </div>
 </header>
 
 <main id="main">
 
   <!-- ═══════════════════════════════════ HERO ═══════════════════════════ -->
+  <!-- HERO — WARTET AUF DAS ASSET (WEBSITE-FLUG-V1, 31.08.).
+       Der Papier-Öffner ist Romans Bild («Der Flug»: Papierberge, Tannen, Städtchen,
+       Taube mit Brief, gestrichelte Flugbahn). Es liegt heute NICHT im Baum —
+       `assets/flug/` existiert nicht —, also bleibt der Orb-Hero stehen und die
+       Kapitelstruktur trägt die Richtung allein.
+
+       Wenn die Datei kommt: `assets/flug/` anlegen, und dieser Abschnitt wird zur
+       vollbreiten Papierszene mit EINER Karte auf --forest-2 darauf (Notch wie .cut):
+         Kicker  «01»  ·  Titel «Die Nachricht hebt ab.»
+         Lead    «Der Anruf wird zur Taube. Heidi trägt den Tisch — nicht ein Formular.»
+       Der Orb wandert dann aus dem Hero nach Kapitel 02 (die Stimme am Ziel, nicht die
+       Reise), und die Fusszeile bekommt «Bildwelt teilweise KI-generiert» — heute nicht,
+       weil kein KI-Bild im Baum liegt. Papier ist NIE durchgehender Hintergrund;
+       der Wechsel Papier -> Forest ist das Design. -->
   <section class="hero wrap">
     <div class="hero-grid">
       <div class="hero-copy">
+        <p class="eyebrow hero-kicker"><span class="ch">01</span> Der Flug · Basel</p>
         <h1>Colomba</h1>
         <p class="claim">Der KI-Telefon-Empfang für Schweizer Restaurants.</p>
-        <p class="lead">Heidi nimmt jeden Anruf entgegen, bucht Tische und bestätigt per SMS — auch dann, wenn im Service gerade niemand ans Telefon kann.</p>
+        <p class="lead">Heidi nimmt Anrufe entgegen, bucht Tische und bestätigt per SMS — rund um die Uhr, auch wenn im Service gerade niemand ans Telefon kann.</p>
         <hr class="hero-rule">
 
         <div class="cta">
@@ -470,9 +565,15 @@ footer.site {
     </div>
   </section>
 
+  <div class="flightpath rv" aria-hidden="true">
+    <svg viewBox="0 0 24 120" width="24" height="120" preserveAspectRatio="none">
+      <path d="M12 0 C 3 32, 21 74, 12 120" fill="none" stroke="#9DBE86" stroke-width="1.3" stroke-linecap="round" opacity=".42"/>
+    </svg>
+  </div>
+
   <!-- ═══════════════════════════ DER ANRUF (Signatur) ═══════════════════ -->
   <section class="band wrap" id="anruf">
-    <p class="eyebrow">Die Leitung ist die Demo</p>
+    <p class="eyebrow"><span class="ch">02</span> Über den Bergen</p>
     <h2 class="rv">So klingt ein Anruf bei Heidi.</h2>
     <p class="band-lead rv">Kein Videodreh, keine Behauptung — ein Gespräch, wie Heidi es führt. Nachgestellt, damit kein echter Gast darin vorkommt.</p>
 
@@ -482,7 +583,7 @@ footer.site {
         <li class="bubble heidi" style="--i:0">
           <div class="cut">
             <span class="who">Heidi</span>
-            <p>Grüezi, hier ist Heidi, die KI-Assistentin vom Restaurant Zum Rhyboge. Womit darf ich Ihnen helfen?</p>
+            <p>Grüezi, hier ist Heidi, die KI-Assistentin vom Gasthaus zum Brunnen. Womit darf ich Ihnen helfen?</p>
           </div>
         </li>
         <li class="bubble guest" style="--i:1">
@@ -508,7 +609,7 @@ footer.site {
         <li class="bubble sms" style="--i:5">
           <div class="sms-card cut">
             <span class="who">SMS an den Gast</span>
-            <p>Ihre Reservation im Restaurant Zum Rhyboge: heute, 19:00 Uhr, 4 Personen. Stornocode <span class="code">S-4172</span>.</p>
+            <p>Ihre Reservation im Gasthaus zum Brunnen: heute, 19:00 Uhr, 4 Personen. Stornocode <span class="code">S-4172</span>.</p>
           </div>
         </li>
       </ol>
@@ -520,17 +621,23 @@ footer.site {
     </div>
   </section>
 
+  <div class="flightpath rv" aria-hidden="true">
+    <svg viewBox="0 0 24 120" width="24" height="120" preserveAspectRatio="none">
+      <path d="M12 0 C 3 32, 21 74, 12 120" fill="none" stroke="#9DBE86" stroke-width="1.3" stroke-linecap="round" opacity=".42"/>
+    </svg>
+  </div>
+
   <!-- ═══════════════════════════ WAS HEIDI ÜBERNIMMT ════════════════════ -->
   <section class="band wrap" id="heute">
-    <p class="eyebrow">Heute im Einsatz</p>
+    <p class="eyebrow"><span class="ch">03</span> Heute im Einsatz</p>
     <h2 class="rv">Was Heidi übernimmt.</h2>
     <p class="band-lead rv">Heidi arbeitet heute in einem Basler Pilotbetrieb und nimmt dort echte Reservationen entgegen. Das kann sie:</p>
 
     <div class="cards">
       <div class="card cut rv">
         <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#A6B39C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4l3 3-2 3a11 11 0 005 5l3-2 3 3-2 2A16 16 0 014 6z"/></svg>
-        <h3>Jeder Anruf, angenommen</h3>
-        <p>Mittags-Service, Abendbetrieb, Ruhetag: Heidi ist erreichbar, wenn niemand ans Telefon kann.</p>
+        <h3>Erreichbar, wenn niemand abnehmen kann</h3>
+        <p>Mittags-Service, Abendbetrieb, Ruhetag: Heidi nimmt ab.</p>
       </div>
       <div class="card cut rv">
         <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#A6B39C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10h18 M12 10v9 M8 19h8"/></svg>
@@ -560,9 +667,48 @@ footer.site {
     </div>
   </section>
 
+  <!-- ═════════════════════════ 04 · GRENZEN ═════════════════════════════ -->
+  <!-- Wortlaut: Roman (Content-Lane), 31.08. Jede Zeile belegt durch
+       colomba/docs/heidi-capabilities-2026-08.md — «Zurückgezogen: Ausfallgebühr CHF 30»,
+       «Wissensbasis», «Kann-ich-nicht-Protokoll». Nichts hier ist eine neue Behauptung. -->
+  <section class="band wrap" id="grenzen">
+    <p class="eyebrow"><span class="ch">04</span> Grenzen</p>
+    <h2 class="rv">Was die Taube nicht trägt.</h2>
+    <p class="band-lead rv">Ein Empfang, der seine Grenzen kennt, ist ein Empfang, dem man vertraut.</p>
+
+    <div class="cards pairs">
+      <div class="card cut rv">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#A6B39C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9h6 M9 15h6 M12 6.5v11"/></svg>
+        <h3>Heidi entscheidet nichts über Geld.</h3>
+        <p>Preise, Gebühren, Ausnahmen — das sagt der Wirt, nicht die Assistentin.</p>
+      </div>
+      <div class="card cut rv">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#A6B39C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5h7a2 2 0 012 2V19a2 2 0 00-2-1.6H4z M20 5.5h-7a2 2 0 00-2 2V19a2 2 0 012-1.6h7z"/></svg>
+        <h3>Heidi verspricht nichts, was nicht in Ihrer Wissensbasis steht.</h3>
+        <p>Was sie nicht weiss, sagt sie — und legt es Ihnen als Aufgabe hin.</p>
+      </div>
+      <div class="card cut rv">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#A6B39C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5h18v9H3z M3 11h18"/><path d="M4 4l16 16"/></svg>
+        <h3>Heidi nimmt keine Zahlungen entgegen.</h3>
+        <p>Keine Kartendaten, keine Anzahlung, keine Rechnung am Telefon.</p>
+      </div>
+      <div class="card cut rv">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#A6B39C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11a3 3 0 100-6 3 3 0 000 6z M3.5 19.5a5.5 5.5 0 0111 0 M16 11.5a2.6 2.6 0 100-5.2 M17 19.5a5 5 0 00-1.6-3.6"/></svg>
+        <h3>Heidi ersetzt kein Team.</h3>
+        <p>Sie nimmt ab, wenn niemand kann — den Gast am Tisch begrüssen Sie.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="flightpath rv" aria-hidden="true">
+    <svg viewBox="0 0 24 120" width="24" height="120" preserveAspectRatio="none">
+      <path d="M12 0 C 3 32, 21 74, 12 120" fill="none" stroke="#9DBE86" stroke-width="1.3" stroke-linecap="round" opacity=".42"/>
+    </svg>
+  </div>
+
   <!-- ═══════════════════════════════ DIE APP ════════════════════════════ -->
   <section class="band wrap" id="app">
-    <p class="eyebrow">Die Colomba App</p>
+    <p class="eyebrow"><span class="ch">05</span> Die Landung</p>
     <div class="app-grid">
       <div class="app-copy">
         <h2 class="rv">Ihr Betrieb, in einer App.</h2>
@@ -582,17 +728,121 @@ footer.site {
     </div>
   </section>
 
+  <div class="flightpath rv" aria-hidden="true">
+    <svg viewBox="0 0 24 120" width="24" height="120" preserveAspectRatio="none">
+      <path d="M12 0 C 3 32, 21 74, 12 120" fill="none" stroke="#9DBE86" stroke-width="1.3" stroke-linecap="round" opacity=".42"/>
+    </svg>
+  </div>
+
+  <!-- ══════════════════════ 06 · PREIS (v4.1) ════════════════════════ -->
+  <!-- EINZIGE QUELLE: colomba/api/rate_card_v2.py (pricing model v4.1) + billing/SPEC.md §10.
+       Keine Zahl hier ist gerechnet oder gerundet. Tote Karten, die NICHT hierher gehören:
+       199/299 (SPEC §10a) und 290/390/690 (Studio-Canvas «Abo & Rechnungen»).
+       PRICING-FAIRUSE-1LINE-1: der Preis der zweiten Leitung steht, die Verfügbarkeit ist
+       eine Messung (EDGE-BENCH-PORTABLE-1) — diese Seite stellt sie nirgends als
+       verfügbar dar. -->
+  <section class="band wrap" id="preis">
+    <p class="eyebrow"><span class="ch">06</span> Der Preis des Flugs</p>
+    <h2 class="rv">Was Colomba kostet.</h2>
+    <p class="band-lead rv">Drei Dinge, die Sie wählen: wie viel Assistentin, wie viele Minuten, und ob Heidi bei Ihnen im Haus läuft.</p>
+
+    <div class="prices">
+      <div class="price-card cut rv">
+        <p class="price-kicker">Assistent</p>
+        <p class="price-sub">Die App und Heidis Arbeit darin — monatlich, Nutzungsbalken mit Monatsreset.</p>
+        <ul class="price-list">
+          <li><b>Free</b><span class="num">CHF 0</span><span class="note">1 Anruf pro Monat, kleiner Aufgaben-Pool, 10 SMS</span></li>
+          <li><b>Start</b><span class="num">CHF 39</span></li>
+          <li><b>Plus</b><span class="num">CHF 89</span><span class="note">4× Balken, Analytik, Integrationen</span></li>
+          <li><b>Max</b><span class="num">CHF 169</span><span class="note">10× Balken, Priorität, Multi-Brand, Early Access</span></li>
+        </ul>
+      </div>
+
+      <div class="price-card cut rv">
+        <p class="price-kicker">Telefonminuten</p>
+        <p class="price-sub">Gesprächsminuten auf Ihrer Linie. SMS zählen 1:1 gegen die Minuten.</p>
+        <ul class="price-list">
+          <li><b>100&nbsp;Min</b><span class="num">CHF 69</span><span class="note">CHF 0.69 pro Minute</span></li>
+          <li><b>250&nbsp;Min</b><span class="num">CHF 159</span><span class="note">CHF 0.636 pro Minute</span></li>
+          <li><b>500&nbsp;Min</b><span class="num">CHF 309</span><span class="note">CHF 0.618 pro Minute</span></li>
+          <li><b>1000&nbsp;Min</b><span class="num">CHF 549</span><span class="note">CHF 0.549 pro Minute</span></li>
+        </ul>
+        <p class="price-foot"><b>Überhang</b>, gestaffelt nach Monatsverbrauch: bis 100&nbsp;Min CHF 0.85 · 101–200 CHF 0.75 · 201–500 CHF 0.68 · ab 501 CHF 0.62 pro Minute. Jede weitere SMS CHF 0.20.</p>
+      </div>
+
+      <div class="price-card cut rv">
+        <p class="price-kicker">Colomba Haus</p>
+        <p class="price-sub">Heidi läuft auf einer Box bei Ihnen im Haus.</p>
+        <ul class="price-list">
+          <li><b>Monatlich</b><span class="num">CHF 399</span><span class="note">Max inklusive, unbegrenzte Minuten auf der Box im Haus</span></li>
+          <li><b>Jährlich</b><span class="num">CHF 3'990</span></li>
+          <li><b>Haus Kit</b><span class="num">ab CHF 1'290</span><span class="note">Box und ein Tablet, Selbstinstallation mit Heidi</span></li>
+          <li><b>Vor-Ort-Installation</b><span class="num">+CHF 199</span><span class="note">optional</span></li>
+          <li><b>Einzeln</b><span class="num">Box CHF 790 · Tablet CHF 490</span></li>
+        </ul>
+        <p class="price-foot">Enthalten ist <b>eine gleichzeitige Leitung</b>. Jede weitere Leitung ist mit CHF 49 pro Monat bepreist; wie viele Ihr Haus trägt, messen wir vor der Installation.</p>
+      </div>
+    </div>
+
+    <p class="price-legal rv">Alle Preise CHF, exkl. 8.1&nbsp;% MWST · monatlich kündbar · keine Einrichtungsgebühr.</p>
+  </section>
+
+  <div class="flightpath rv" aria-hidden="true">
+    <svg viewBox="0 0 24 120" width="24" height="120" preserveAspectRatio="none">
+      <path d="M12 0 C 3 32, 21 74, 12 120" fill="none" stroke="#9DBE86" stroke-width="1.3" stroke-linecap="round" opacity=".42"/>
+    </svg>
+  </div>
+
+  <!-- ═══════════════════════ 07 · DAS NEST ════════════════════════════ -->
+  <!-- Colomba Haus darf in Kundendokumenten erscheinen (SPEC §10, PRICING-FAIRUSE-1LINE-1:
+       «ruling and measurement now agree»). Was hier NICHT steht: eine zweite gleichzeitige
+       Leitung als verfügbar, und irgendeine Aussage über konkrete Hardware-Modelle
+       (die sind laut SPEC offen). -->
+  <section class="band wrap" id="haus">
+    <p class="eyebrow"><span class="ch">07</span> Das Nest</p>
+    <div class="haus-grid">
+      <div class="haus-copy">
+        <h2 class="rv">Wenn Heidi bei Ihnen wohnt.</h2>
+        <p class="band-lead rv">Colomba Haus ist die Variante für Betriebe, die alles im eigenen Haus behalten wollen: Heidi läuft auf einer Box in Ihrem Betrieb, die Minuten auf dieser Box sind unbegrenzt, und die Max-Stufe der App ist eingeschlossen.</p>
+        <p class="band-lead rv">Eine gleichzeitige Leitung ist enthalten — das ist die Zahl, die wir auf der Zielhardware gemessen haben, nicht die, die sich am besten liest. Was Ihr Haus darüber hinaus trägt, messen wir vor der Installation.</p>
+      </div>
+      <div class="haus-visual rv">
+        <div class="rail cut">
+          <p class="rail-title">Was im Haus bleibt</p>
+          <div class="rail-tabs">
+            <div class="rail-tab cut"><b>Die Box</b><span>Heidi läuft vor Ort, nicht irgendwo.</span></div>
+            <div class="rail-tab cut"><b>Die Minuten</b><span>Unbegrenzt auf der Box im Haus.</span></div>
+            <div class="rail-tab cut"><b>Die App</b><span>Max-Stufe, ohne Aufpreis.</span></div>
+            <div class="rail-tab cut"><b>Die Leitung</b><span>Eine gleichzeitige, gemessen.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="flightpath rv" aria-hidden="true">
+    <svg viewBox="0 0 24 120" width="24" height="120" preserveAspectRatio="none">
+      <path d="M12 0 C 3 32, 21 74, 12 120" fill="none" stroke="#9DBE86" stroke-width="1.3" stroke-linecap="round" opacity=".42"/>
+    </svg>
+  </div>
+
   <!-- ═══════════════════════════ TRANSPARENZ ════════════════════════════ -->
   <section class="band wrap" id="transparenz">
-    <p class="eyebrow">Transparenz</p>
+    <p class="eyebrow"><span class="ch">08</span> Transparenz</p>
     <h2 class="rv">Ihre Gäste wissen, mit wem sie sprechen.</h2>
     <p class="quote rv">Heidi gibt sich im ersten Satz jedes Anrufs als KI-Assistentin zu erkennen. <em>Immer.</em></p>
     <p class="band-lead rv">Wir halten das für eine Stärke. Ein Empfang, der ehrlich ist, schafft Vertrauen — beim Gast und im Team.</p>
   </section>
 
+  <div class="flightpath rv" aria-hidden="true">
+    <svg viewBox="0 0 24 120" width="24" height="120" preserveAspectRatio="none">
+      <path d="M12 0 C 3 32, 21 74, 12 120" fill="none" stroke="#9DBE86" stroke-width="1.3" stroke-linecap="round" opacity=".42"/>
+    </svg>
+  </div>
+
   <!-- ═══════════════════════════ IN ENTWICKLUNG ═════════════════════════ -->
   <section class="band wrap" id="kommt">
-    <p class="eyebrow">In Entwicklung</p>
+    <p class="eyebrow"><span class="ch">09</span> In Entwicklung</p>
     <h2 class="rv">Woran wir gerade bauen.</h2>
     <ul class="kommt rv">
       <li><b>Dokumente erfassen</b><span>Lieferscheine und Belege direkt aus der App fotografieren.</span></li>
@@ -603,9 +853,15 @@ footer.site {
     </ul>
   </section>
 
+  <div class="flightpath rv" aria-hidden="true">
+    <svg viewBox="0 0 24 120" width="24" height="120" preserveAspectRatio="none">
+      <path d="M12 0 C 3 32, 21 74, 12 120" fill="none" stroke="#9DBE86" stroke-width="1.3" stroke-linecap="round" opacity=".42"/>
+    </svg>
+  </div>
+
   <!-- ═══════════════════════════════ PILOT ══════════════════════════════ -->
   <section class="band wrap" id="pilot">
-    <p class="eyebrow">Pilotprogramm</p>
+    <p class="eyebrow"><span class="ch">10</span> Pilotprogramm</p>
     <div class="pilot-final cut rv">
       <p class="big">Pilotprogramm 2026 — wir richten ausgewählten Basler Restaurants eine kostenlose Testinstallation ein.</p>
       <p class="after">Anfragen: <a href="https://www.instagram.com/colombaswiss/" rel="me noopener">Instagram&nbsp;@colombaswiss</a> — wir melden uns persönlich.</p>
