@@ -147,6 +147,39 @@ header.site {
 /* Die padding-Kurzform hat die seitliche Polsterung von .wrap überschrieben —
    auf 390 px klebte der Hero am linken Rand, während der Kopf eingerückt war.
    Vorbestehend, hier mitgenommen. */
+/* ------------------------------------------------------------ paper hero */
+/* Full-bleed opener (WEBSITE-FLUG-V1.2) — Romans Bild «Der Flug», Kapitel 01.
+   Kein harter Rand: das Bild löst sich über einen Verlauf in --forest auf, nie eine
+   Textur- oder Hard-Cut-Kante. Die Karte unten links liegt frei über dem Bild. */
+.paper-hero { position: relative; overflow: hidden; }
+.paper-hero picture, .paper-hero img {
+  display: block; width: 100%; height: clamp(320px, 62vh, 720px); object-fit: cover;
+}
+.paper-hero::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40%;
+  background: linear-gradient(to bottom, rgba(28,43,38,0) 0%, var(--forest) 92%);
+  pointer-events: none;
+}
+.paper-hero-card {
+  --cut: 14px;
+  position: absolute; left: var(--pad-x); bottom: clamp(20px, 4vh, 40px);
+  max-width: 420px; background: var(--forest-2); border: 1px solid var(--hairline);
+  padding: 20px 22px; z-index: 2;
+}
+.paper-hero-card .eyebrow { margin-bottom: 10px; }
+.paper-hero-card h2 {
+  font-family: var(--serif); font-weight: 600; font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+  line-height: 1.25; letter-spacing: -.01em; margin: 0 0 10px; color: var(--cream);
+}
+.paper-hero-card p { margin: 0; color: var(--text); font-size: 15px; line-height: 1.55; }
+@media (max-width: 880px) {
+  .paper-hero picture, .paper-hero img { height: 46vh; min-height: 240px; }
+  .paper-hero-card {
+    position: static; max-width: none; margin: 0; border-top: none;
+  }
+  .paper-hero::after { display: none; }
+}
+
 .hero { padding: clamp(24px, 6vh, 72px) var(--pad-x) clamp(40px, 8vh, 96px); }
 .hero-grid {
   display: flex; flex-wrap: wrap; align-items: center;
@@ -196,6 +229,9 @@ h1 {
 
 /* orb stage */
 .hero-stage { flex: 1 1 340px; min-width: 260px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+/* Kapitel-02-Grösse — der Orb ist hier ein Akzent neben dem Gespräch, keine Hero-Bühne mehr. */
+.hero-stage--compact { flex: none; max-width: 180px; margin: 28px 0 0; gap: 10px; }
+.hero-stage--compact .stage-box { max-width: 150px; }
 .stage-box { position: relative; width: 100%; max-width: 420px; aspect-ratio: 1; }
 .ring { position: absolute; inset: 0; pointer-events: none; --r: calc(50% - 26px); }
 .ring .node {
@@ -226,7 +262,14 @@ h1 {
 
 /* -------------------------------------------------------------- sections */
 section.band { padding: clamp(48px, 9vh, 104px) 0; border-top: 1px solid var(--hairline); }
-section.band.deep { background: var(--forest-deep); }
+/* Weicher Verlauf statt harter Naht (WEBSITE-FLUG-V1.2, Polierstelle a): kein border-top mehr
+   auf den Tiefen-Bändern — die Kante ist der Verlauf selbst, ~80px an jedem Rand. */
+section.band.deep {
+  border-top: none;
+  background: linear-gradient(to bottom,
+    var(--forest) 0, var(--forest-deep) 80px,
+    var(--forest-deep) calc(100% - 80px), var(--forest) 100%);
+}
 h2 {
   font-family: var(--serif); font-weight: 600;
   font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.12; letter-spacing: -.02em;
@@ -245,8 +288,11 @@ h2 {
 .anruf-grid { display: flex; flex-wrap: wrap; gap: clamp(24px, 4vw, 40px); align-items: flex-start; margin: 36px 0 0; }
 .scene { max-width: 640px; margin: 0; flex: 1 1 460px; }
 .call-shot {
+  /* Polierstelle b: 380px -> ~460px, damit auf der Platte erkennbar ist, DASS es ein
+     Transkript ist. scene(460) + call-shot(460) + gap(<=40) = <=960px, passt locker in
+     --wrap: 1160px bei 1440 — kein Wechsel unter die Bubbles nötig. */
   --cut: 14px;
-  flex: 0 1 380px; min-width: 260px; max-width: 420px; margin: 0;
+  flex: 0 1 460px; min-width: 260px; max-width: 460px; margin: 0;
   background: var(--forest-2); border: 1px solid var(--hairline); padding: 10px;
 }
 .call-shot picture, .call-shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
@@ -389,6 +435,7 @@ footer.site {
 .foot-links a { color: var(--sage); }
 .foot-links a:hover { color: var(--cream); }
 .madein { letter-spacing: .1em; text-transform: uppercase; font-weight: 700; font-size: 11px; }
+.ai-image-note { margin: 10px 0 0; font-size: 11.5px; color: var(--sage); opacity: .8; }
 
 /* -------------------------------------------------------------- legal */
 .legal { max-width: 680px; padding: clamp(32px, 6vh, 64px) 0; }
@@ -524,20 +571,25 @@ footer.site {
 <main id="main">
 
   <!-- ═══════════════════════════════════ HERO ═══════════════════════════ -->
-  <!-- HERO — WARTET AUF DAS ASSET (WEBSITE-FLUG-V1, 31.08.).
-       Der Papier-Öffner ist Romans Bild («Der Flug»: Papierberge, Tannen, Städtchen,
-       Taube mit Brief, gestrichelte Flugbahn). Es liegt heute NICHT im Baum —
-       `assets/flug/` existiert nicht —, also bleibt der Orb-Hero stehen und die
-       Kapitelstruktur trägt die Richtung allein.
+  <!-- PAPIER-HERO (WEBSITE-FLUG-V1.2, 31.08.) — Romans Bild «Der Flug» ist jetzt im Baum
+       (`assets/flug/01-aufbruch.jpg`). Vollbreite Szene, Karte unten links auf --forest-2
+       mit Notch (.cut). Der bisherige Hero-Text (Claim/Lead/CTA/Pilot-Karte) bleibt darunter
+       unverändert stehen; der Orb + Status-Chip sind aus dem Hero nach Kapitel 02 gewandert
+       (die Stimme am Ziel, nicht die Reise). Papier ist NIE durchgehender Hintergrund — der
+       Verlauf am unteren Bildrand ist der Wechsel Papier -> Forest. -->
+  <section class="paper-hero">
+    <picture>
+      <source type="image/webp" srcset="assets/flug/01-aufbruch.webp">
+      <img src="assets/flug/01-aufbruch.jpg" width="1792" height="1008" loading="eager"
+           alt="Papierberge, Tannen und ein Städtchen bei Nacht — eine Taube trägt einen Brief über eine gestrichelte Flugbahn (Illustration, Kapitel 01: Der Flug)">
+    </picture>
+    <div class="paper-hero-card cut">
+      <p class="eyebrow"><span class="ch">01</span> Der Flug · Basel</p>
+      <h2>Die Nachricht hebt ab.</h2>
+      <p>Der Anruf wird zur Taube. Heidi trägt den Tisch — nicht ein Formular.</p>
+    </div>
+  </section>
 
-       Wenn die Datei kommt: `assets/flug/` anlegen, und dieser Abschnitt wird zur
-       vollbreiten Papierszene mit EINER Karte auf --forest-2 darauf (Notch wie .cut):
-         Kicker  «01»  ·  Titel «Die Nachricht hebt ab.»
-         Lead    «Der Anruf wird zur Taube. Heidi trägt den Tisch — nicht ein Formular.»
-       Der Orb wandert dann aus dem Hero nach Kapitel 02 (die Stimme am Ziel, nicht die
-       Reise), und die Fusszeile bekommt «Bildwelt teilweise KI-generiert» — heute nicht,
-       weil kein KI-Bild im Baum liegt. Papier ist NIE durchgehender Hintergrund;
-       der Wechsel Papier -> Forest ist das Design. -->
   <section class="hero wrap">
     <div class="hero-grid">
       <div class="hero-copy">
@@ -567,19 +619,6 @@ footer.site {
           </div>
         </div>
       </div>
-
-      <div class="hero-stage" aria-label="Heidi, dargestellt als lebendige Lichtkugel">
-        <div class="stage-box">
-          <div class="ring" aria-hidden="true" id="ring"></div>
-          <div class="orb-mount" id="orb-mount">
-            <div class="ember" id="ember"></div>
-          </div>
-        </div>
-        <p class="status-chip cut" id="status-chip">
-          <span class="dot live" id="status-dot" aria-hidden="true"></span>
-          <span id="status-text">Heidi hört zu.</span>
-        </p>
-      </div>
     </div>
   </section>
 
@@ -596,6 +635,19 @@ footer.site {
     <h2 class="rv">So klingt ein Anruf bei Heidi.</h2>
     <p class="band-lead rv">Kein Videodreh, keine Behauptung — ein Gespräch, wie Heidi es führt. Nachgestellt, damit kein echter Gast darin vorkommt.</p>
 
+    <div class="hero-stage hero-stage--compact" aria-label="Heidi, dargestellt als lebendige Lichtkugel">
+      <div class="stage-box">
+        <div class="ring" aria-hidden="true" id="ring"></div>
+        <div class="orb-mount" id="orb-mount">
+          <div class="ember" id="ember"></div>
+        </div>
+      </div>
+      <p class="status-chip cut" id="status-chip">
+        <span class="dot live" id="status-dot" aria-hidden="true"></span>
+        <span id="status-text">Heidi hört zu.</span>
+      </p>
+    </div>
+
     <div class="anruf-grid">
       <div class="scene" id="scene">
         <span class="scene-tag cut">Beispiel · nachgestellt</span>
@@ -603,7 +655,7 @@ footer.site {
           <li class="bubble heidi" style="--i:0">
             <div class="cut">
               <span class="who">Heidi</span>
-              <p>Grüezi, hier ist Heidi, die KI-Assistentin von Osteria Milano. Womit darf ich Ihnen helfen?</p>
+              <p>Grüezi, hier ist Heidi, die KI-Assistentin von Zum Rhyboge. Womit darf ich Ihnen helfen?</p>
             </div>
           </li>
           <li class="bubble guest" style="--i:1">
@@ -629,7 +681,7 @@ footer.site {
           <li class="bubble sms" style="--i:5">
             <div class="sms-card cut">
               <span class="who">SMS an den Gast</span>
-              <p>Ihre Reservation bei Osteria Milano: heute, 19:00 Uhr, 4 Personen. Stornocode <span class="code">S-4172</span>.</p>
+              <p>Ihre Reservation bei Zum Rhyboge: heute, 19:00 Uhr, 4 Personen. Stornocode <span class="code">S-4172</span>.</p>
             </div>
           </li>
         </ol>
@@ -642,7 +694,7 @@ footer.site {
       <figure class="call-shot cut rv">
         <picture>
           <source type="image/webp" srcset="assets/app/s3-anrufe@1x.webp 1x, assets/app/s3-anrufe@2x.webp 2x">
-          <img src="assets/app/s3-anrufe@1x.webp" width="1440" height="900" loading="lazy" alt="App-Ansicht: Anrufe, Transkript aufgeklappt, Beispiel nachgestellt (Osteria Milano)">
+          <img src="assets/app/s3-anrufe@1x.webp" width="1440" height="900" loading="lazy" alt="App-Ansicht: Anrufe, Transkript aufgeklappt, Beispiel nachgestellt (Zum Rhyboge)">
         </picture>
         <figcaption class="eyebrow">So sieht der Wirt das Gespräch in der App</figcaption>
       </figure>
@@ -752,16 +804,16 @@ footer.site {
         <figure class="app-shot main cut">
           <picture>
             <source type="image/webp" srcset="assets/app/s1-reservationen@1x.webp 1x, assets/app/s1-reservationen@2x.webp 2x">
-            <img src="assets/app/s1-reservationen@1x.webp" width="1440" height="900" loading="lazy" alt="App-Ansicht: Heute, Reservationsliste (Osteria Milano)">
+            <img src="assets/app/s1-reservationen@1x.webp" width="1440" height="900" loading="lazy" alt="App-Ansicht: Heute, Reservationsliste (Zum Rhyboge)">
           </picture>
           <figcaption class="eyebrow">Heute · Reservationsliste</figcaption>
         </figure>
         <figure class="app-shot cut">
           <picture>
-            <source type="image/webp" srcset="assets/app/s4-woche@1x.webp 1x, assets/app/s4-woche@2x.webp 2x">
-            <img src="assets/app/s4-woche@1x.webp" width="1440" height="900" loading="lazy" alt="App-Ansicht: Woche, 28 Reservationen, nachgestellt (Osteria Milano)">
+            <source type="image/webp" srcset="assets/app/s4-buchungen@1x.webp 1x, assets/app/s4-buchungen@2x.webp 2x">
+            <img src="assets/app/s4-buchungen@1x.webp" width="1440" height="900" loading="lazy" alt="App-Ansicht: Buchungen, Reservationsliste, nachgestellt (Zum Rhyboge)">
           </picture>
-          <figcaption class="eyebrow">Woche · 28 Reservationen, nachgestellt</figcaption>
+          <figcaption class="eyebrow">Buchungen · Reservationsliste, nachgestellt</figcaption>
         </figure>
         <div class="rail cut">
           <p class="rail-title">Vier Ansichten, ein Tag</p>
@@ -941,6 +993,9 @@ footer.site {
       <a href="https://www.instagram.com/colombaswiss/" rel="me noopener">Instagram</a>
     </nav>
     <span class="madein">Made in Switzerland</span>
+  </div>
+  <div class="wrap">
+    <p class="ai-image-note">Bildwelt teilweise KI-generiert.</p>
   </div>
 </footer>
 
