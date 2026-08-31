@@ -486,15 +486,16 @@ die telefonische KI-Assistentin, die Anrufe für angeschlossene Gastronomiebetri
   bearbeitet diese Daten ausschliesslich weisungsgebunden. Ergänzend gilt die
   Datenschutzerklärung des jeweiligen Betriebs.</li>
 </ul>
-<!-- F4 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY, Adrian-Ruling): JA, Standard-AVV als
-     fester Vertragsbestandteil mit jedem angeschlossenen Betrieb (Betrieb = Verantwortlicher,
-     Colomba = Auftragsbearbeiterin — deckt sich mit §3 oben). Satz unten bleibt in
-     Gegenwartsform stehen (Report-Option 2: der Satz wird erst richtig, weil der AVV real
-     abgeschlossen wird — nicht durch Abschwächung auf Zukunftsform). Draft liegt vor
-     (colomba/legal/drafts/adv-auftragsbearbeitungsvertrag.md, 17 offene PLACEHOLDER-Felder,
-     an keinen konkreten Betrieb gebunden). Das reale Abschliessen mit jedem Piloten ist eine
-     harte Deploy-Voraussetzung — siehe Report "OFFENE DEPLOY-VORAUSSETZUNGEN". -->
-<p>Mit den angeschlossenen Betrieben besteht eine Vereinbarung zur Auftragsbearbeitung.</p>
+<!-- F4 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY, Adrian-Ruling F4:1, Report-Option 1):
+     Satz auf Zukunftsform geändert — die Gegenwarts-Behauptung ("besteht eine Vereinbarung") ist
+     raus, weil kein Betrieb bislang einen unterschriebenen AVV hat. Der AVV-DRAFT selbst
+     (colomba/legal/drafts/adv-auftragsbearbeitungsvertrag.md, 17 offene PLACEHOLDER-Felder, an
+     keinen konkreten Betrieb gebunden) bleibt unberührt — der reale Abschluss ist Teil des
+     Pilot-Onboardings, nicht dieser Mission. KORRIGIERT 2026-08-31 (zweiter Durchlauf): der
+     zuerst gelandete Commit c176d36 hatte hier Report-Option 2 gewählt (Satz unverändert
+     lassen) — das war nicht das Ruling. -->
+<p>Mit jedem angeschlossenen Betrieb wird eine Vereinbarung zur Auftragsbearbeitung
+abgeschlossen.</p>
 
 <h2 id="app">4. Daten, welche die Colomba-App bearbeitet</h2>
 
@@ -623,24 +624,25 @@ wir diese auf anerkannte Garantien wie die Standardvertragsklauseln. Wir verkauf
 Personendaten und geben sie nicht zu Werbezwecken weiter.</p>
 
 <h2 id="aufbewahrung">9. Aufbewahrung</h2>
-<!-- F9 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY, Adrian-Ruling). Anrufaufzeichnungen/
-     Transkripte (90 Tage) UNVERÄNDERT — Prep-Report bestätigt: Retell löscht providerseitig
-     automatisch spätestens innert 90 Tagen (agent/DECISIONS.md:470, retell_hydrate.py:16),
-     deckt sich mit dem Text; die 90-Tage-Löschung existiert technisch bereits, damit greift die
-     LÖSCH-ROUTINE-90D-Bauklausel aus dem Ruling NICHT (Bedingung "existiert noch nicht" trifft
-     nicht zu). Reservationsdaten-Zeile per Ruling umformuliert: Reservations-/Gast-Notizen
-     werden für die Dauer der Kundenbeziehung des Betriebs mit dem Gast aufbewahrt (keine der
-     drei Report-Optionen passte wörtlich — nächstliegend ist Option 3, Frist als Policy/
-     Zielwert statt automatisierter Garantie; diese Abweichung von der wörtlichen Report-Option
-     steht hier so benannt). Kontodaten- und Aufgaben-Zeilen UNVERÄNDERT — das Ruling äussert
-     sich nicht zu diesen zwei Kategorien; der Prep-Report fand auch für sie keinen
-     automatisierten Löschmechanismus im Code (nur MEDIA_UNFILED_RETENTION_DAYS für hochgeladene
-     Medien, nicht für bookings/users/tasks). Das bleibt eine offene Lücke, aber ausserhalb
-     dessen, was heute entschieden wurde — siehe Report "OFFENE DEPLOY-VORAUSSETZUNGEN". -->
+<!-- F9 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY, Adrian-Ruling F9:1, Report-Option 1):
+     alle vier Fristen bleiben wie ursprünglich geschrieben — 30 Tage / 24 Monate / 90 Tage /
+     12 Monate, nichts abgeschwächt. Die technische Durchsetzung ist jetzt ENFORCED CODE für
+     Konto- (30T) und Aufgaben-Fristen (12M): COLOMBA-RETENTION-CRON auf oscar
+     (colomba/api/retention.py + retention_job.py, migration 0023_retention_anchors.sql,
+     commit cacf092159, ts=1788210265.731879). Anrufaufzeichnungen (90 Tage) laufen weiterhin
+     providerseitig automatisch über Retell (agent/DECISIONS.md:470, retell_hydrate.py:16).
+     Reservationsdaten (24 Monate) sind laut COLOMBA-RETENTION-CRON-Report bewusst DISARMED, weil
+     §9 dafür keine Zahl mehr publizierte — dieser Text publiziert sie hier wieder, also bleibt
+     "24 Monate nach dem Reservationsdatum" die kanonische Zahl, an der sich die Reservation-
+     Kategorie ausrichten muss, sobald sie armiert wird. KORRIGIERT 2026-08-31 (zweiter
+     Durchlauf): der zuerst gelandete Commit c176d36 hatte die Reservationszeile auf eine
+     vage "Dauer der Kundenbeziehung"-Formulierung umgeschrieben (Report-Option 3) — das war
+     nicht das Ruling und widersprach zudem bereits der zu diesem Zeitpunkt gelandeten
+     COLOMBA-RETENTION-CRON-Zahl; zurückgesetzt auf den Original-Wortlaut. -->
 <table>
   <tr><th>Kategorie</th><th>Aufbewahrung</th></tr>
   <tr><td>Kontodaten</td><td>für die Dauer des Kontos, danach Löschung innert 30 Tagen</td></tr>
-  <tr><td>Reservations- und Gästedaten</td><td>für die Dauer der Kundenbeziehung des Betriebs mit dem Gast, danach unter Berücksichtigung gesetzlicher Aufbewahrungsfristen</td></tr>
+  <tr><td>Reservationsdaten</td><td>24 Monate nach dem Reservationsdatum</td></tr>
   <tr><td>Anrufaufzeichnungen und Transkripte</td><td>90 Tage; beim Telefonie-Anbieter erfolgt die Löschung automatisch spätestens innert 90 Tagen</td></tr>
   <tr><td>Aufgaben und Rückrufe</td><td>12 Monate</td></tr>
 </table>
@@ -673,16 +675,18 @@ verschlüsselten Speicher des Betriebssystems abgelegt.</p>
 <!-- F10 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY): gemessen, nicht nur angenommen.
      Marketing-Website: curl -I gegen die Staging-URL zeigt keinen Set-Cookie-Header, kein
      Analytics-/Tracking-Script im Baum (grep 0 Treffer). Web-App (/app/*): eine httpOnly
-     Session-Cookie (Anmeldung, serverseitig, 30 Tage) + eine lesbare CSRF-Cookie
-     (Sicherheitsmerkmal) — beides technisch notwendig, keines davon Analyse/Marketing; Zusatz
-     unten ergänzt, weil der Prep-Report einen unerwähnten Datenfluss fand: Google Fonts wird
-     per preconnect geladen und überträgt die Besucher-IP an Google (kein Cookie, aber ein
-     Datenfluss). -->
+     Refresh-Cookie (Anmeldung, serverseitig, 30 Tage, für JS nicht lesbar) + eine lesbare
+     CSRF-Cookie (Sicherheitsmerkmal, Double-Submit-Pattern) — beides technisch notwendig,
+     keines davon Analyse/Marketing; Zusatz unten ergänzt, weil der Prep-Report zwei unerwähnte
+     Punkte fand: (a) die 30-Tage-Laufzeit der Anmelde-Cookie stand nur im Kommentar, nicht im
+     sichtbaren Text — KORRIGIERT 2026-08-31 (zweiter Durchlauf), jetzt im Fliesstext benannt;
+     (b) Google Fonts wird per preconnect geladen und überträgt die Besucher-IP an Google (kein
+     Cookie, aber ein Datenfluss). -->
 <p>Die Web-Anwendung setzt ausschliesslich technisch notwendige Speichermerkmale, die für die
-Anmeldung und den Schutz vor Cross-Site-Request-Forgery erforderlich sind. Es werden keine
-Analyse- oder Marketing-Cookies verwendet. Für die Darstellung wird die Schriftart über Google
-Fonts nachgeladen, wobei Ihre IP-Adresse an Google übertragen wird; dabei wird kein Cookie
-gesetzt.</p>
+Anmeldung und den Schutz vor Cross-Site-Request-Forgery erforderlich sind: eine Anmelde-Cookie
+mit einer Laufzeit von 30 Tagen sowie eine CSRF-Schutz-Cookie. Es werden keine Analyse- oder
+Marketing-Cookies verwendet. Für die Darstellung wird die Schriftart über Google Fonts
+nachgeladen, wobei Ihre IP-Adresse an Google übertragen wird; dabei wird kein Cookie gesetzt.</p>
 
 <h2 id="aenderungen">14. Änderungen</h2>
 <p>Wir können diese Erklärung anpassen. Massgebend ist die jeweils auf dieser Seite
