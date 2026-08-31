@@ -428,17 +428,24 @@ footer.site {
        DATENSCHUTZ-RESTORE-1 (30.08., Adrian-Lane) als die zu veröffentlichende
        erklärt. Nur die Gestaltung ist neu.
 
-       FREIGABE-GATE, UNVERÄNDERT: die Quelle trägt ihr eigenes «DO NOT PUBLISH
-       until every [CONFIRM-ADRIAN] is signed off» und sieben offene Punkte
-       (F3 Stand-Datum · F4 AVV mit den Betrieben · F6 Rechtsgrundlage
+       FREIGABE-GATE, AKTUALISIERT 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY): die Quelle trug
+       vormals ein «DO NOT PUBLISH until every [CONFIRM-ADRIAN] is signed off» mit sieben
+       offenen Punkten (F3 Stand-Datum · F4 AVV mit den Betrieben · F6 Rechtsgrundlage
        Allergie-/Gesundheitsdaten · F7 Auftragsbearbeiter-Liste · F8 Google-Daten
-       · F9 Aufbewahrungsfristen · F10 Cookies der Web-Oberfläche). Diese Seite
-       ist damit deploy-BEREIT, aber nicht deploy-FREI: die Freigabe ist Adrians,
-       nicht die dieser Mission. Keine Rechtsberatung.
+       · F9 Aufbewahrungsfristen · F10 Cookies der Web-Oberfläche) — alle sieben sind jetzt
+       per Adrians Ruling vom 31.8. aufgelöst (siehe Auflösungs-Kommentare unten je Fundstelle
+       und colomba/reports/2026-08-31/datenschutz-confirm-apply.md). Diese Seite ist damit
+       deploy-BEREIT, aber nicht deploy-FREI: zwei offene operative Voraussetzungen (Standard-
+       AVV real mit jedem Betrieb abgeschlossen; Löschroutine Kontodaten/Aufgaben) stehen im
+       Report, nicht als [CONFIRM-ADRIAN] hier. Die Freigabe zum tatsächlichen Go-Live bleibt
+       Adrians/Romans, nicht die dieser Mission — kein Deploy, kein ARM. Keine Rechtsberatung.
        ══════════════════════════════════════════════════════════════════════ -->
 
-<!-- [CONFIRM-ADRIAN] F3 — Stand-Datum. Proposal: date of first publication. -->
-<p class="stand">Stand: 11. August 2026</p>
+<!-- F3 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY, Adrian-Ruling): Stand-Datum =
+     Deploy-Datum, nicht Verfassungsdatum. Diese Mission deployt nicht (nur Push nach Staging);
+     das Datum unten ist der Stand dieser Textfinalisierung und MUSS vom Deploy-Runner auf das
+     tatsächliche Go-Live-Datum aktualisiert werden, falls dieses abweicht. -->
+<p class="stand">Stand: 31. August 2026</p>
 
 <p>Diese Erklärung beschreibt, welche Personendaten wir im Zusammenhang mit der Colomba-App und
 der telefonischen KI-Assistentin bearbeiten, zu welchen Zwecken das geschieht und welche Rechte
@@ -479,9 +486,16 @@ die telefonische KI-Assistentin, die Anrufe für angeschlossene Gastronomiebetri
   bearbeitet diese Daten ausschliesslich weisungsgebunden. Ergänzend gilt die
   Datenschutzerklärung des jeweiligen Betriebs.</li>
 </ul>
-<!-- [CONFIRM-ADRIAN] F4 — Auftragsbearbeitungsvertrag (AVV/DPA) mit den Betrieben.
-     Proposal below asserts only that one is CONCLUDED, which must be true before publishing. -->
-<p>Mit den angeschlossenen Betrieben besteht eine Vereinbarung zur Auftragsbearbeitung.</p>
+<!-- F4 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY, Adrian-Ruling F4:1, Report-Option 1):
+     Satz auf Zukunftsform geändert — die Gegenwarts-Behauptung ("besteht eine Vereinbarung") ist
+     raus, weil kein Betrieb bislang einen unterschriebenen AVV hat. Der AVV-DRAFT selbst
+     (colomba/legal/drafts/adv-auftragsbearbeitungsvertrag.md, 17 offene PLACEHOLDER-Felder, an
+     keinen konkreten Betrieb gebunden) bleibt unberührt — der reale Abschluss ist Teil des
+     Pilot-Onboardings, nicht dieser Mission. KORRIGIERT 2026-08-31 (zweiter Durchlauf): der
+     zuerst gelandete Commit c176d36 hatte hier Report-Option 2 gewählt (Satz unverändert
+     lassen) — das war nicht das Ruling. -->
+<p>Mit jedem angeschlossenen Betrieb wird eine Vereinbarung zur Auftragsbearbeitung
+abgeschlossen.</p>
 
 <h2 id="app">4. Daten, welche die Colomba-App bearbeitet</h2>
 
@@ -547,9 +561,10 @@ Weg erreichen.</p>
 <h2 id="google">6. Anmeldung mit Google</h2>
 <p>Nutzen Sie «Mit Google anmelden», übermittelt Google uns ein Identitätsmerkmal, welches Ihre
 Google-Kennung, Ihre E-Mail-Adresse, Ihren Namen und einen Link auf Ihr Profilbild enthalten kann.
-<!-- [CONFIRM-ADRIAN] F8 — depends on PART A3 (does the backend persist name/picture?).
-     The sentence below states the CONSERVATIVE case (only identifier + e-mail retained).
-     If A3 shows name/picture ARE persisted, replace this sentence before publishing. -->
+<!-- F8 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY): geprüft gegen das INSERT-Statement
+     (colomba/api/main.py:4730-4740) — die konservative Fassung unten stimmt: nur
+     Google-Kennung + E-Mail landen in tenant_google, kein Name-, kein Bild-Feld (Name/Bild nur
+     transient aus dem id_token gelesen, nie gespeichert). Kein Textänderungsbedarf. -->
 Wir verwenden diese Angaben zur Zuordnung Ihres Kontos; dauerhaft gespeichert werden dabei Ihre
 Google-Kennung und Ihre E-Mail-Adresse.</p>
 <p>Die Anmeldung selbst wird von Google durchgeführt; dabei gelten zusätzlich die
@@ -566,21 +581,36 @@ Datenschutzbestimmungen von Google.</p>
        so consent could not have been validly obtained. Stated as contract performance, which
        is what the recording actually serves (executing and evidencing the reservation). -->
   <tr><td>Gesprächsaufzeichnung</td><td>Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO)</td></tr>
-  <!-- [CONFIRM-ADRIAN] F6 — legal basis for allergy (health) data. Proposal: explicit consent. -->
-  <tr><td>Angaben zu Allergien</td><td>Ausdrückliche Einwilligung (Art. 9 Abs. 2 lit. a DSGVO)</td></tr>
+  <!-- F6 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY, Adrian-Ruling): Rechtsgrundlage auf
+       "freiwillige Angabe des Gastes" gestützt statt ausdrücklicher Einwilligung — es gibt
+       keinen Code-Pfad, der vor dem Speichern eine gesonderte Einwilligung einholt (weder App
+       noch Telefon). Formulierung übernimmt wortgleich die bestehende Begründung aus §4.2 oben
+       ("ausschliesslich zur Durchführung der Reservation... stets eine freiwillige Angabe"),
+       keine neue Rechtstext-Formulierung erfunden. -->
+  <tr><td>Angaben zu Allergien</td><td>Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO) — freiwillige Angabe des Gastes zur Durchführung der Reservation</td></tr>
 </table>
 
 <h2 id="dritte">8. Auftragsbearbeiter, Hosting und Auslandbekanntgabe</h2>
-<!-- [CONFIRM-ADRIAN] F7 — sub-processor list. Hosting = Hetzner Online GmbH, Helsinki/FI (EU) —
-     CONFIRMED 2026-08-30 (DATENSCHUTZ-RESTORE-1, Adrian-Lane ruling; pablo = Hetzner CX23,
-     Helsinki, fleet/TOPOLOGY.md). Country corrected from an earlier unverified "(DE)" note.
-     The Google / telephony rows below still need confirming against the live stack before
-     publishing. HARD RULE from the brief: never claim "Server in der Schweiz". -->
+<!-- F7 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY, Adrian-Ruling: Text↔Code-Abweichungen
+     aus dem Prep-Report in Richtung Code-Realität aufgelöst). Hosting-Zeile unverändert
+     (CONFIRMED 2026-08-30, DATENSCHUTZ-RESTORE-1). Neu aufgelöst gegen den Prep-Report:
+     - Telefonie-Pauschalzeile aufgesplittet: Retell AI (Call-Handling) · Anthropic (LLM der
+       Assistentin) · ElevenLabs (Sprachsynthese) waren im Text zu einer Zeile verschmolzen,
+       Code zeigt drei getrennte Anbieter (heidi-de-shadow-agent.json, heidi-llm-live.pre-*.json,
+       heidi_config_snapshot.py).
+     - Google-Zeile um Kalender-Sync und Google-Bewertungen ergänzt (beide LIVE seit 2026-06-14,
+       docs/credential-inventory.md:143-144) sowie um das Postfach info@colomba-swiss.ch
+       (MX zeigt auf smtp.google.com, gemessen 2026-08-31) — fehlte komplett im Text.
+     - Twilio (SMS-Versand, z.B. Storno-Code) ergänzt — fehlte komplett in der Tabelle, taucht im
+       Code durchgängig auf (twilio_ch_number_capability.py, test_sms.py). -->
 <table>
   <tr><th>Empfänger</th><th>Zweck</th><th>Ort der Bearbeitung</th></tr>
   <tr><td>Hetzner Online GmbH</td><td>Hosting der Anwendung und der Datenbank</td><td>Finnland, Helsinki (EU)</td></tr>
-  <tr><td>Google Ireland Ltd. / Google LLC</td><td>«Mit Google anmelden»; Versand von Push-Mitteilungen, sofern aktiviert</td><td>EU / USA</td></tr>
-  <tr><td>Anbieter der Telefonie- und Sprachverarbeitung</td><td>Entgegennahme und Verarbeitung von Anrufen</td><td>EU / USA</td></tr>
+  <tr><td>Google Ireland Ltd. / Google LLC</td><td>«Mit Google anmelden»; Kalender-Synchronisation und Verwaltung von Google-Bewertungen, sofern vom Betrieb verbunden; Versand von Push-Mitteilungen, sofern aktiviert; E-Mail-Postfach info@colomba-swiss.ch</td><td>EU / USA</td></tr>
+  <tr><td>Retell AI</td><td>Entgegennahme und Verarbeitung von Telefonanrufen (Call-Handling der KI-Assistentin)</td><td>EU / USA</td></tr>
+  <tr><td>Anthropic</td><td>Sprachmodell zur Gesprächsführung der KI-Assistentin</td><td>EU / USA</td></tr>
+  <tr><td>ElevenLabs</td><td>Sprachsynthese (Text-zu-Sprache) der KI-Assistentin</td><td>EU / USA</td></tr>
+  <tr><td>Twilio</td><td>Versand von SMS (z. B. Storno-Code, Buchungsbestätigung)</td><td>EU / USA</td></tr>
 </table>
 <div class="box">
   <p><strong>Hinweis zum Serverstandort:</strong> Unsere Anwendung und die Datenbank werden in
@@ -594,7 +624,21 @@ wir diese auf anerkannte Garantien wie die Standardvertragsklauseln. Wir verkauf
 Personendaten und geben sie nicht zu Werbezwecken weiter.</p>
 
 <h2 id="aufbewahrung">9. Aufbewahrung</h2>
-<!-- [CONFIRM-ADRIAN] F9 — retention periods per category. Proposals below. -->
+<!-- F9 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY, Adrian-Ruling F9:1, Report-Option 1):
+     alle vier Fristen bleiben wie ursprünglich geschrieben — 30 Tage / 24 Monate / 90 Tage /
+     12 Monate, nichts abgeschwächt. Die technische Durchsetzung ist jetzt ENFORCED CODE für
+     Konto- (30T) und Aufgaben-Fristen (12M): COLOMBA-RETENTION-CRON auf oscar
+     (colomba/api/retention.py + retention_job.py, migration 0023_retention_anchors.sql,
+     commit cacf092159, ts=1788210265.731879). Anrufaufzeichnungen (90 Tage) laufen weiterhin
+     providerseitig automatisch über Retell (agent/DECISIONS.md:470, retell_hydrate.py:16).
+     Reservationsdaten (24 Monate) sind laut COLOMBA-RETENTION-CRON-Report bewusst DISARMED, weil
+     §9 dafür keine Zahl mehr publizierte — dieser Text publiziert sie hier wieder, also bleibt
+     "24 Monate nach dem Reservationsdatum" die kanonische Zahl, an der sich die Reservation-
+     Kategorie ausrichten muss, sobald sie armiert wird. KORRIGIERT 2026-08-31 (zweiter
+     Durchlauf): der zuerst gelandete Commit c176d36 hatte die Reservationszeile auf eine
+     vage "Dauer der Kundenbeziehung"-Formulierung umgeschrieben (Report-Option 3) — das war
+     nicht das Ruling und widersprach zudem bereits der zu diesem Zeitpunkt gelandeten
+     COLOMBA-RETENTION-CRON-Zahl; zurückgesetzt auf den Original-Wortlaut. -->
 <table>
   <tr><th>Kategorie</th><th>Aufbewahrung</th></tr>
   <tr><td>Kontodaten</td><td>für die Dauer des Kontos, danach Löschung innert 30 Tagen</td></tr>
@@ -628,9 +672,21 @@ verschlüsselten Speicher des Betriebssystems abgelegt.</p>
 <p>Die App richtet sich an Gastronomiebetriebe und deren Personal und nicht an Kinder.</p>
 
 <h2 id="cookies">13. Cookies</h2>
-<!-- [CONFIRM-ADRIAN] F10 — confirm the web surface sets no analytics/marketing cookies. -->
+<!-- F10 — RESOLVED 2026-08-31 (DATENSCHUTZ-CONFIRM-APPLY): gemessen, nicht nur angenommen.
+     Marketing-Website: curl -I gegen die Staging-URL zeigt keinen Set-Cookie-Header, kein
+     Analytics-/Tracking-Script im Baum (grep 0 Treffer). Web-App (/app/*): eine httpOnly
+     Refresh-Cookie (Anmeldung, serverseitig, 30 Tage, für JS nicht lesbar) + eine lesbare
+     CSRF-Cookie (Sicherheitsmerkmal, Double-Submit-Pattern) — beides technisch notwendig,
+     keines davon Analyse/Marketing; Zusatz unten ergänzt, weil der Prep-Report zwei unerwähnte
+     Punkte fand: (a) die 30-Tage-Laufzeit der Anmelde-Cookie stand nur im Kommentar, nicht im
+     sichtbaren Text — KORRIGIERT 2026-08-31 (zweiter Durchlauf), jetzt im Fliesstext benannt;
+     (b) Google Fonts wird per preconnect geladen und überträgt die Besucher-IP an Google (kein
+     Cookie, aber ein Datenfluss). -->
 <p>Die Web-Anwendung setzt ausschliesslich technisch notwendige Speichermerkmale, die für die
-Anmeldung erforderlich sind. Es werden keine Analyse- oder Marketing-Cookies verwendet.</p>
+Anmeldung und den Schutz vor Cross-Site-Request-Forgery erforderlich sind: eine Anmelde-Cookie
+mit einer Laufzeit von 30 Tagen sowie eine CSRF-Schutz-Cookie. Es werden keine Analyse- oder
+Marketing-Cookies verwendet. Für die Darstellung wird die Schriftart über Google Fonts
+nachgeladen, wobei Ihre IP-Adresse an Google übertragen wird; dabei wird kein Cookie gesetzt.</p>
 
 <h2 id="aenderungen">14. Änderungen</h2>
 <p>Wir können diese Erklärung anpassen. Massgebend ist die jeweils auf dieser Seite

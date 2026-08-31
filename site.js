@@ -103,6 +103,26 @@
     else addEventListener('load', whenVisible, { once: true });
   }
 
+  /* ── paper-hero: plays once, crossfades back to the still (V1.3) ─────
+     No <source> ships in the markup at all — they're only appended here,
+     and only once both gates pass, so a mobile / reduced-motion visitor
+     never triggers a byte of video request (verify via network log, not
+     the absence of an autoplay attribute). */
+  const heroVideo = doc.getElementById('paper-hero-video');
+  const wide = matchMedia('(min-width: 881px)').matches;
+  if (heroVideo && wide && !reduced) {
+    const webm = doc.createElement('source');
+    webm.src = heroVideo.dataset.webm; webm.type = 'video/webm';
+    const mp4 = doc.createElement('source');
+    mp4.src = heroVideo.dataset.mp4; mp4.type = 'video/mp4';
+    heroVideo.append(webm, mp4);
+    heroVideo.addEventListener('ended', () => heroVideo.classList.remove('is-active'));
+    heroVideo.load();
+    const p = heroVideo.play();
+    if (p && p.then) { p.then(() => heroVideo.classList.add('is-active')).catch(() => {}); }
+    else heroVideo.classList.add('is-active');
+  }
+
   /* ── the call scene plays itself into view ────────────────────────── */
   const scene = doc.getElementById('scene');
   if (scene) {
