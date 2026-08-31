@@ -152,9 +152,19 @@ header.site {
    Kein harter Rand: das Bild löst sich über einen Verlauf in --forest auf, nie eine
    Textur- oder Hard-Cut-Kante. Die Karte unten links liegt frei über dem Bild. */
 .paper-hero { position: relative; overflow: hidden; }
-.paper-hero picture, .paper-hero img {
-  display: block; width: 100%; height: clamp(320px, 62vh, 720px); object-fit: cover;
+.paper-hero-media {
+  position: relative; width: 100%; height: clamp(320px, 62vh, 720px);
 }
+.paper-hero-media picture, .paper-hero-media img, .paper-hero-media video {
+  position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover;
+}
+/* V1.3 HERO-MOTION: video is the enhancement, the still (poster, same asset)
+   is the resting state underneath. Opacity-only crossfade both ways — never
+   removed from layout, so no reflow when it starts or ends. Autoplay-once,
+   no loop: `is-active` is added by site.js right before .play() and removed
+   on the `ended` event, which is what drives the fade back to the still. */
+.paper-hero-video { opacity: 0; transition: opacity .8s ease; pointer-events: none; }
+.paper-hero-video.is-active { opacity: 1; }
 .paper-hero::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 40%;
   background: linear-gradient(to bottom, rgba(28,43,38,0) 0%, var(--forest) 92%);
@@ -173,7 +183,7 @@ header.site {
 }
 .paper-hero-card p { margin: 0; color: var(--text); font-size: 15px; line-height: 1.55; }
 @media (max-width: 880px) {
-  .paper-hero picture, .paper-hero img { height: 46vh; min-height: 240px; }
+  .paper-hero-media { height: 46vh; min-height: 240px; }
   .paper-hero-card {
     position: static; max-width: none; margin: 0; border-top: none;
   }
@@ -576,13 +586,25 @@ footer.site {
        mit Notch (.cut). Der bisherige Hero-Text (Claim/Lead/CTA/Pilot-Karte) bleibt darunter
        unverändert stehen; der Orb + Status-Chip sind aus dem Hero nach Kapitel 02 gewandert
        (die Stimme am Ziel, nicht die Reise). Papier ist NIE durchgehender Hintergrund — der
-       Verlauf am unteren Bildrand ist der Wechsel Papier -> Forest. -->
+       Verlauf am unteren Bildrand ist der Wechsel Papier -> Forest.
+       V1.3 HERO-MOTION: das Standbild bleibt die eigentliche Ruhelage; das Video ist reine
+       Anreicherung. Es hat serverseitig KEINE <source> — site.js hängt sie nur an, wenn
+       Viewport > 880px UND kein prefers-reduced-motion, dann .play(); auf `ended` fällt
+       `is-active` wieder weg und die Opacity-Transition legt das Standbild wieder frei.
+       Ohne JS bleibt es bei genau diesem Standbild (kein Autoplay-Attribut, keine Sources
+       im Markup) — das IST der No-JS-Fallback, kein Sonderfall. -->
   <section class="paper-hero">
-    <picture>
-      <source type="image/webp" srcset="assets/flug/01-aufbruch.webp">
-      <img src="assets/flug/01-aufbruch.jpg" width="1792" height="1008" loading="eager"
-           alt="Papierberge, Tannen und ein Städtchen bei Nacht — eine Taube trägt einen Brief über eine gestrichelte Flugbahn (Illustration, Kapitel 01: Der Flug)">
-    </picture>
+    <div class="paper-hero-media">
+      <picture>
+        <source type="image/webp" srcset="assets/flug/01-aufbruch.webp">
+        <img src="assets/flug/01-aufbruch.jpg" width="1792" height="1008" loading="eager"
+             alt="Papierberge, Tannen und ein Städtchen bei Nacht — eine Taube trägt einen Brief über eine gestrichelte Flugbahn (Illustration, Kapitel 01: Der Flug)">
+      </picture>
+      <video class="paper-hero-video" id="paper-hero-video" muted playsinline preload="none"
+             width="1936" height="1040" aria-hidden="true" tabindex="-1"
+             data-webm="assets/flug/01-aufbruch-motion.webm"
+             data-mp4="assets/flug/01-aufbruch-motion.mp4"></video>
+    </div>
     <div class="paper-hero-card cut">
       <p class="eyebrow"><span class="ch">01</span> Der Flug · Basel</p>
       <h2>Die Nachricht hebt ab.</h2>
