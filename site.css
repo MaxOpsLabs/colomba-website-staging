@@ -96,7 +96,7 @@ header.site {
   display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
 }
 .mark { display: flex; align-items: center; gap: 11px; color: var(--cream); }
-.mark img { display: block; width: 34px; height: 34px; }
+.mark img { display: block; width: 48px; height: 48px; }
 .mark b {
   font-family: var(--serif);
   font-variation-settings: "wght" 560, "opsz" 105;
@@ -335,7 +335,7 @@ footer.site {
 }
 .foot-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px 24px; }
 .foot-left { display: flex; align-items: center; gap: 10px; }
-.foot-left img { width: 22px; height: 22px; }
+.foot-left img { width: 56px; height: 56px; }
 .foot-links { display: flex; flex-wrap: wrap; gap: 4px 22px; }
 .foot-links a { color: var(--sage); }
 .foot-links a:hover { color: var(--cream); }
