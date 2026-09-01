@@ -1,21 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Colomba">
-  <defs>
-    <linearGradient id="fW" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#CBD8C4"/><stop offset="1" stop-color="#A8B8A3"/>
-    </linearGradient>
-    <linearGradient id="fB" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#A8B8A3"/><stop offset="1" stop-color="#83987F"/>
-    </linearGradient>
-    <linearGradient id="fH" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#DCB392"/><stop offset="1" stop-color="#C89B7B"/>
-    </linearGradient>
-  </defs>
+  <title>Colomba</title>
+  <!-- WEBSITE-V2-LOGO-B: Silhouette (C, colomba/design/logo/dove-mono.svg) in --cream auf
+       --forest-Quadrat, rx=14 wie bisher. C statt der Farbtaube (B), weil B bei 16/32 px
+       zu einem Fleck verwaescht — gemessen, siehe Report. -->
   <rect width="64" height="64" rx="14" fill="#1C2B26"/>
-  <g transform="translate(8.32 8.32) scale(0.74)">
-    <polygon points="26,2 50,30 22,25" fill="url(#fW)"/>
-    <polygon points="22,25 50,30 32,56" fill="url(#fB)"/>
-    <polygon points="22,25 32,56 11,36" fill="#6F8A73"/>
-    <polygon points="22,25 2,14 11,36" fill="#93A88E"/>
-    <polygon points="46,26 62,14 60,25 50,32" fill="url(#fH)"/>
-  </g>
+  <svg x="8" y="8" width="48" height="48" viewBox="262 69 682 857" preserveAspectRatio="xMidYMid meet">
+    <path fill="#FBF4E9" d="M302,81 420,218 274,174 470,432 527,607 483,681 284,781 394,813 315,913 434,845 513,666 610,715 550,775 696,727 735,650 824,605 863,482 818,496 884,433 931,445 876,381 812,379 721,449 650,302Z"/>
+  </svg>
 </svg>

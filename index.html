@@ -545,6 +545,9 @@ footer.site {
 .haus-copy .band-lead + .band-lead { margin-top: 14px; }
 .haus-visual { flex: 1 1 320px; min-width: 260px; }
 </style>
+<!-- SOCIAL-SLOT (WEBSITE-V2-LOGO-B, 01.09.): "sameAs" fuehrt nur belegte Profile.
+     LinkedIn/Facebook sind in docs/ACCOUNTS-REGISTRY.md §3 "offen" - sobald eine
+     kanonische URL existiert, hier in "sameAs" ergaenzen und im Footer verlinken. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -552,6 +555,7 @@ footer.site {
   "name": "Colomba",
   "url": "https://colomba-swiss.ch/",
   "logo": "https://colomba-swiss.ch/assets/favicon-512.png",
+  "email": "info@colomba-swiss.ch",
   "sameAs": ["https://www.instagram.com/colombaswiss/"],
   "address": { "@type": "PostalAddress", "addressLocality": "Basel", "addressCountry": "CH" }
 }
@@ -637,7 +641,7 @@ footer.site {
             <div class="pilot-card cut">
               <p>Pilotprogramm 2026 — wir richten ausgewählten Basler Restaurants eine kostenlose Testinstallation ein.</p>
             </div>
-            <p class="contact-line">Anfragen: <a href="https://www.instagram.com/colombaswiss/" rel="me noopener">Instagram&nbsp;@colombaswiss</a></p>
+            <p class="contact-line">Anfragen: <a href="mailto:info@colomba-swiss.ch">info@colomba-swiss.ch</a> oder <a href="https://www.instagram.com/colombaswiss/" rel="me noopener">Instagram&nbsp;@colombaswiss</a> — wir melden uns persönlich.</p>
           </div>
         </div>
       </div>
@@ -998,7 +1002,7 @@ footer.site {
     <p class="eyebrow"><span class="ch">10</span> Pilotprogramm</p>
     <div class="pilot-final cut rv">
       <p class="big">Pilotprogramm 2026 — wir richten ausgewählten Basler Restaurants eine kostenlose Testinstallation ein.</p>
-      <p class="after">Anfragen: <a href="https://www.instagram.com/colombaswiss/" rel="me noopener">Instagram&nbsp;@colombaswiss</a> — wir melden uns persönlich.</p>
+      <p class="after">Anfragen: <a href="mailto:info@colomba-swiss.ch">info@colomba-swiss.ch</a> oder <a href="https://www.instagram.com/colombaswiss/" rel="me noopener">Instagram&nbsp;@colombaswiss</a> — wir melden uns persönlich.</p>
     </div>
     </div>
   </section>
@@ -1014,7 +1018,14 @@ footer.site {
     <nav class="foot-links" aria-label="Rechtliches">
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
+      <a href="mailto:info@colomba-swiss.ch">info@colomba-swiss.ch</a>
       <a href="https://www.instagram.com/colombaswiss/" rel="me noopener">Instagram</a>
+      <!-- SOCIAL-SLOT (WEBSITE-V2-LOGO-B, 01.09.): LinkedIn und Facebook sind in
+           docs/ACCOUNTS-REGISTRY.md §3 als "offen" gefuehrt - kein Profil belegt, keine
+           kanonische URL im Repo. Kein geratener Link. Sobald eine Seite existiert, hier
+           eintragen UND in "sameAs" im JSON-LD oben:
+           <a href="https://www.linkedin.com/company/..." rel="me noopener">LinkedIn</a>
+           <a href="https://www.facebook.com/..." rel="me noopener">Facebook</a> -->
     </nav>
     <span class="madein">Made in Switzerland</span>
   </div>
