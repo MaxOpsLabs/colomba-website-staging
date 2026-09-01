@@ -7,8 +7,7 @@
 <title>Colomba — Heidi, die Betriebsassistentin für Schweizer Restaurants</title>
 <meta name="description" content="Heidi, die Betriebsassistentin für Schweizer Restaurants. Heute nimmt sie Anrufe entgegen, bucht Tische und bestätigt per SMS — rund um die Uhr, auch wenn im Service gerade niemand ans Telefon kann.">
 <link rel="canonical" href="https://colomba-swiss.ch/">
-<!-- i18n-ready: DE ships first. EN/FR/IT land as /en/ /fr/ /it/ siblings of this file;
-     hreflang links activate here when the first sibling exists. -->
+
 <meta property="og:type" content="website">
 <meta property="og:title" content="Colomba — Heidi, die Betriebsassistentin für Schweizer Restaurants">
 <meta property="og:description" content="Heidi nimmt Anrufe entgegen, bucht Tische und bestätigt per SMS — rund um die Uhr, auch wenn im Service gerade niemand ans Telefon kann.">
@@ -545,9 +544,7 @@ footer.site {
 .haus-copy .band-lead + .band-lead { margin-top: 14px; }
 .haus-visual { flex: 1 1 320px; min-width: 260px; }
 </style>
-<!-- SOCIAL-SLOT (WEBSITE-V2-LOGO-B, 01.09.): "sameAs" fuehrt nur belegte Profile.
-     LinkedIn/Facebook sind in docs/ACCOUNTS-REGISTRY.md §3 "offen" - sobald eine
-     kanonische URL existiert, hier in "sameAs" ergaenzen und im Footer verlinken. -->
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -584,25 +581,12 @@ footer.site {
 
 <main id="main">
 
-  <!-- ═══════════════════════════════════ HERO ═══════════════════════════ -->
-  <!-- PAPIER-HERO (WEBSITE-FLUG-V1.2, 31.08.) — Romans Bild «Der Flug» ist jetzt im Baum
-       (`assets/flug/01-aufbruch.jpg`). Vollbreite Szene, Karte unten links auf --forest-2
-       mit Notch (.cut). Der bisherige Hero-Text (Claim/Lead/CTA/Pilot-Karte) bleibt darunter
-       unverändert stehen; der Orb + Status-Chip sind aus dem Hero nach Kapitel 02 gewandert
-       (die Stimme am Ziel, nicht die Reise). Papier ist NIE durchgehender Hintergrund — der
-       Verlauf am unteren Bildrand ist der Wechsel Papier -> Forest.
-       V1.3 HERO-MOTION: das Standbild bleibt die eigentliche Ruhelage; das Video ist reine
-       Anreicherung. Es hat serverseitig KEINE <source> — site.js hängt sie nur an, wenn
-       Viewport > 880px UND kein prefers-reduced-motion, dann .play(); auf `ended` fällt
-       `is-active` wieder weg und die Opacity-Transition legt das Standbild wieder frei.
-       Ohne JS bleibt es bei genau diesem Standbild (kein Autoplay-Attribut, keine Sources
-       im Markup) — das IST der No-JS-Fallback, kein Sonderfall. -->
   <section class="paper-hero">
     <div class="paper-hero-media">
       <picture>
         <source type="image/webp" srcset="assets/flug/01-aufbruch.webp">
         <img src="assets/flug/01-aufbruch.jpg" width="1792" height="1008" loading="eager"
-             alt="Papierberge, Tannen und ein Städtchen bei Nacht — eine Taube trägt einen Brief über eine gestrichelte Flugbahn (Illustration, Kapitel 01: Der Flug)">
+             alt="Papierlandschaft bei Tag: Tannen und ein Städtchen am Fluss vor Bergen, darüber eine Origami-Taube im Flug (Illustration, Kapitel 01: Der Flug)">
       </picture>
       <video class="paper-hero-video" id="paper-hero-video" muted playsinline preload="none"
              width="1936" height="1040" aria-hidden="true" tabindex="-1"
@@ -626,17 +610,7 @@ footer.site {
         <hr class="hero-rule">
 
         <div class="cta">
-          <!-- OWN-LINE-1 · CALL-CTA — «Die Leitung ist die Demo».
-               Aktivieren, sobald die eigene Colomba-Demo-Nummer live und im
-               Tenant-Routing verifiziert ist:
-               1. `hidden` vom <a class="cta-call"> entfernen
-               2. `hidden` auf <div class="cta-fallback"> setzen
-               3. Nummer in href (tel:) und im sichtbaren Text eintragen.
-          <a class="cta-call cut" href="tel:+41XXXXXXXXXX" hidden>
-            <span class="big">Rufen Sie an und sprechen Sie mit Heidi.</span>
-            <span class="tel">+41 XX XXX XX XX</span>
-          </a>
-          -->
+
           <div class="cta-fallback">
             <div class="pilot-card cut">
               <p>Pilotprogramm 2026 — wir richten ausgewählten Basler Restaurants eine kostenlose Testinstallation ein.</p>
@@ -654,7 +628,6 @@ footer.site {
     </svg>
   </div>
 
-  <!-- ═══════════════════════════ DER ANRUF (Signatur) ═══════════════════ -->
   <section class="band" id="anruf">
     <div class="wrap">
     <p class="eyebrow"><span class="ch">02</span> Über den Bergen</p>
@@ -734,12 +707,11 @@ footer.site {
     </svg>
   </div>
 
-  <!-- ═══════════════════════════ WAS HEIDI ÜBERNIMMT ════════════════════ -->
   <section class="band deep" id="heute">
     <div class="wrap">
     <p class="eyebrow"><span class="ch">03</span> Heute im Einsatz</p>
     <h2 class="rv">Was Heidi übernimmt.</h2>
-    <p class="band-lead rv">Heidi arbeitet heute in einem Basler Pilotbetrieb und nimmt dort echte Reservationen entgegen. Von ihren sieben Aufgabenbereichen sind zwei im Einsatz: Telefon und Reservationen. Das kann sie:</p>
+    <p class="band-lead rv">Heidi nimmt heute auf unserer Basler Pilotlinie echte Anrufe entgegen — 78 seit Juni. Von ihren sieben Aufgabenbereichen sind zwei im Einsatz: Telefon und Reservationen. Das kann sie:</p>
 
     <div class="cards">
       <div class="card cut rv">
@@ -764,8 +736,8 @@ footer.site {
       </div>
       <div class="card cut rv">
         <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#A6B39C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16v11H4z M4 8l2.5-3h11L20 8 M4 13h5a3 3 0 006 0h5"/></svg>
-        <h3>Nichts geht verloren</h3>
-        <p>Was Heidi nicht abschliessen kann, wird zur Aufgabe in Ihrer App.</p>
+        <h3>Rückrufe werden zur Aufgabe</h3>
+        <p>Rückrufe landen als Aufgabe in Ihrer App.</p>
       </div>
       <div class="card cut rv">
         <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#A6B39C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11v2 M7 8v8 M11 4v16 M15 7v10 M19 10v4"/></svg>
@@ -776,10 +748,6 @@ footer.site {
     </div>
   </section>
 
-  <!-- ═════════════════════════ 04 · GRENZEN ═════════════════════════════ -->
-  <!-- Wortlaut: Roman (Content-Lane), 31.08. Jede Zeile belegt durch
-       colomba/docs/heidi-capabilities-2026-08.md — «Zurückgezogen: Ausfallgebühr CHF 30»,
-       «Wissensbasis», «Kann-ich-nicht-Protokoll». Nichts hier ist eine neue Behauptung. -->
   <section class="band" id="grenzen">
     <div class="wrap">
     <p class="eyebrow"><span class="ch">04</span> Grenzen</p>
@@ -817,7 +785,6 @@ footer.site {
     </svg>
   </div>
 
-  <!-- ═══════════════════════════════ DIE APP ════════════════════════════ -->
   <section class="band deep" id="app">
     <div class="wrap">
     <p class="eyebrow"><span class="ch">05</span> Die Landung</p>
@@ -861,13 +828,6 @@ footer.site {
     </svg>
   </div>
 
-  <!-- ══════════════════════ 06 · PREIS (v4.1) ════════════════════════ -->
-  <!-- EINZIGE QUELLE: colomba/api/rate_card_v2.py (pricing model v4.1) + billing/SPEC.md §10.
-       Keine Zahl hier ist gerechnet oder gerundet. Tote Karten, die NICHT hierher gehören:
-       199/299 (SPEC §10a) und 290/390/690 (Studio-Canvas «Abo & Rechnungen»).
-       PRICING-FAIRUSE-1LINE-1: der Preis der zweiten Leitung steht, die Verfügbarkeit ist
-       eine Messung (EDGE-BENCH-PORTABLE-1) — diese Seite stellt sie nirgends als
-       verfügbar dar. -->
   <section class="band" id="preis">
     <div class="wrap">
     <p class="eyebrow"><span class="ch">06</span> Der Preis des Flugs</p>
@@ -922,11 +882,6 @@ footer.site {
     </svg>
   </div>
 
-  <!-- ═══════════════════════ 07 · DAS NEST ════════════════════════════ -->
-  <!-- Colomba Haus darf in Kundendokumenten erscheinen (SPEC §10, PRICING-FAIRUSE-1LINE-1:
-       «ruling and measurement now agree»). Was hier NICHT steht: eine zweite gleichzeitige
-       Leitung als verfügbar, und irgendeine Aussage über konkrete Hardware-Modelle
-       (die sind laut SPEC offen). -->
   <section class="band deep" id="haus">
     <div class="wrap">
     <p class="eyebrow"><span class="ch">07</span> Das Nest</p>
@@ -957,7 +912,6 @@ footer.site {
     </svg>
   </div>
 
-  <!-- ═══════════════════════════ TRANSPARENZ ════════════════════════════ -->
   <section class="band" id="transparenz">
     <div class="wrap">
     <p class="eyebrow"><span class="ch">08</span> Transparenz</p>
@@ -973,7 +927,6 @@ footer.site {
     </svg>
   </div>
 
-  <!-- ═══════════════════════════ IN ENTWICKLUNG ═════════════════════════ -->
   <section class="band deep" id="kommt">
     <div class="wrap">
     <p class="eyebrow"><span class="ch">09</span> In Entwicklung</p>
@@ -996,7 +949,6 @@ footer.site {
     </svg>
   </div>
 
-  <!-- ═══════════════════════════════ PILOT ══════════════════════════════ -->
   <section class="band" id="pilot">
     <div class="wrap">
     <p class="eyebrow"><span class="ch">10</span> Pilotprogramm</p>
@@ -1020,12 +972,7 @@ footer.site {
       <a href="datenschutz.html">Datenschutz</a>
       <a href="mailto:info@colomba-swiss.ch">info@colomba-swiss.ch</a>
       <a href="https://www.instagram.com/colombaswiss/" rel="me noopener">Instagram</a>
-      <!-- SOCIAL-SLOT (WEBSITE-V2-LOGO-B, 01.09.): LinkedIn und Facebook sind in
-           docs/ACCOUNTS-REGISTRY.md §3 als "offen" gefuehrt - kein Profil belegt, keine
-           kanonische URL im Repo. Kein geratener Link. Sobald eine Seite existiert, hier
-           eintragen UND in "sameAs" im JSON-LD oben:
-           <a href="https://www.linkedin.com/company/..." rel="me noopener">LinkedIn</a>
-           <a href="https://www.facebook.com/..." rel="me noopener">Facebook</a> -->
+
     </nav>
     <span class="madein">Made in Switzerland</span>
   </div>
