@@ -19,6 +19,25 @@
     rv.forEach(el => el.classList.add('in'));
   }
 
+
+  /* ── Pilotanfrage: Adresse kopieren ────────────────────────────────
+     Der Button erscheint nur, wenn die Zwischenablage erreichbar ist;
+     ohne JS bleibt die Adresse markierbarer Text und der mailto-Link. */
+  const kopieren = doc.getElementById('anfrage-kopieren');
+  const adresse = doc.getElementById('anfrage-adresse');
+  if (kopieren && adresse && navigator.clipboard && window.isSecureContext) {
+    kopieren.hidden = false;
+    kopieren.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(adresse.textContent.trim());
+        const alt = kopieren.textContent;
+        kopieren.textContent = 'Kopiert';
+        kopieren.classList.add('ok');
+        setTimeout(() => { kopieren.textContent = alt; kopieren.classList.remove('ok'); }, 2200);
+      } catch (e) { /* Adresse bleibt als Text sichtbar */ }
+    });
+  }
+
   /* ── the seven Aufgabenbereiche orbit the orb ──────────────────────
      Wording is identical to chapters 03 and 09 — one vocabulary, three
      places. Two are in use today, five are in development; the ring says
